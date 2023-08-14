@@ -1,9 +1,6 @@
 import { describe, it, expect } from 'vitest'
-
 import { mount } from '@vue/test-utils'
 import FooterComponentVue from '../FooterComponent.vue'
-import exp from 'constants'
-
 
 describe('Footer', () => {
   it('renders all elements correctly', () => {
