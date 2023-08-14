@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import FooterComponentVue from '../FooterComponent.vue'
+import exp from 'constants'
 
 
 describe('Footer', () => {
@@ -14,8 +15,10 @@ describe('Footer', () => {
 
     const profileLink = footerElement.find('a.profile-link')
     expect(profileLink.exists()).toBe(true)
+    expect(profileLink.attributes('href')).toContain('https://www.lunasmithart.com/')
 
-     const gitHubLink = footerElement.find('a.gitHub-link')
-    expect(gitHubLink.exists()).toBeFalsy
+    const gitHubLink = footerElement.find('a.gitHub-link')
+    expect(gitHubLink.exists()).toBe(true)
+    expect(gitHubLink.attributes('href')).toContain('https://github.com/Lu-Smith/tetris_vue_typescript_tdd')
   })
 })
