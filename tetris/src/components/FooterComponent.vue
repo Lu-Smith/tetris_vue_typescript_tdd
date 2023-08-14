@@ -6,4 +6,4 @@
         <a class="gitHub-link" href="https://github.com/Lu-Smith/tetris_vue_typescript_tdd" target="_blank">GitHub</a>.
       </h4>
     </div>
-  </template>
+</template>
