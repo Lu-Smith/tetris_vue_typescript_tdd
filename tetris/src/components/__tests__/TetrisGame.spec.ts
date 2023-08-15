@@ -15,6 +15,6 @@ describe('TetrisGame', () => {
 
         const pauseButton = wrapper.find('button.pause')
         expect(pauseButton.exists()).toBe(true)
-        expect(pauseButton.text()).toContain('pause')
+        expect(pauseButton.text()).toContain('Pause')
     })
 })
