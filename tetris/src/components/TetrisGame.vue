@@ -4,6 +4,6 @@
     <button class="pause">Pause</button>
     <div class="result-container">
         <div class="score">Score: 0</div>
-        <div class="best-score">Your best score</div>
+        <div class="best-score">Your best score:</div>
     </div>
 </template>
