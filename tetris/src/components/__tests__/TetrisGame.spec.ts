@@ -8,5 +8,13 @@ describe('TetrisGame', () => {
 
         const titleElement = wrapper.find('h2')
         expect(titleElement.exists()).toBe(true)
+
+        const startButton = wrapper.find('button.start')
+        expect(startButton.exists()).toBe(true)
+        expect(startButton.text()).toContain('Start')
+
+        const pauseButton = wrapper.find('button.pause')
+        expect(pauseButton.exists()).toBe(true)
+        expect(pauseButton.text()).toContain('pause')
     })
 })
