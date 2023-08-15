@@ -9,6 +9,7 @@ describe('TetrisGame', () => {
 
         const titleElement = wrapper.find('h2')
         expect(titleElement.exists()).toBe(true)
+        expect(titleElement.text()).toContain('Tetris')
 
         const levelElement = wrapper.find('h3')
         expect(levelElement.exists()).toBe(true)
