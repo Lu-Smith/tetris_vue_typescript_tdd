@@ -17,7 +17,7 @@ describe('TetrisGame', () => {
         expect(pauseButton.exists()).toBe(true)
         expect(pauseButton.text()).toContain('Pause')
 
-        const resultContainer = wrapper.find('div.container')
+        const resultContainer = wrapper.find('div.result-container')
         expect(resultContainer.exists()).toBe(true)
         const scoreElement = resultContainer.find('div.score')
         expect(scoreElement.exists()).toBe(true)
