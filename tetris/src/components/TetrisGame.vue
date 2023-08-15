@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import GameContainer from './GameContainer.vue';
+</script>
+
 <template>
     <h2>I am Tetris Game</h2>
     <h3>level 1</h3>
@@ -7,4 +11,6 @@
         <div class="score">Score: 0</div>
         <div class="best-score">Your best score:</div>
     </div>
+    <GameContainer />
 </template>
+

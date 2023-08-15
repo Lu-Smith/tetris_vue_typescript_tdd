@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from '@vue/test-utils';
 import TetrisGameVue from "../TetrisGame.vue";
+import GameContainerVue from "../GameContainer.vue";
 
 describe('TetrisGame', () => {
     it('renders all elements correctly', () => {
@@ -27,7 +28,7 @@ describe('TetrisGame', () => {
         const bestScoreElement = resultContainer.find('div.best-score')
         expect(bestScoreElement.exists()).toBe(true)
 
-        const gameContainer = wrapper.findComponent(GameContainer)
+        const gameContainer = wrapper.findComponent(GameContainerVue)
         expect(gameContainer.exists()).toBe(true)
 
     })
