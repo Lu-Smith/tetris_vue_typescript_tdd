@@ -27,6 +27,8 @@ describe('TetrisGame', () => {
         const bestScoreElement = resultContainer.find('div.best-score')
         expect(bestScoreElement.exists()).toBe(true)
 
+        const gameContainer = wrapper.findComponent(GameContainer)
+        expect(gameContainer.exists()).toBe(true)
 
     })
 })
