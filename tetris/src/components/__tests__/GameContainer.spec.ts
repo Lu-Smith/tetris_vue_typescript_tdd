@@ -9,7 +9,12 @@ describe('GameContainer', () => {
         //display board
         const boardContainer = wrapper.find('div.board-container')
         expect(boardContainer.exists()).toBe(true)
-        const boardGrid = wrapper.find('grid.board')
+        const boardGrid = wrapper.find('div.board')
         expect(boardGrid.exists()).toBe(true)
+        const rows = boardGrid.findAll('.rows')
+        const cells = boardGrid.findAll('cells')
+        expect(rows).toHaveLength(18)
+        expect(cells).toHaveLength(180)
+
     })
 })
