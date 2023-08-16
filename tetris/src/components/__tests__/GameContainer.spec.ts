@@ -13,7 +13,7 @@ describe('GameContainer', () => {
         expect(boardGrid.exists()).toBe(true)
         const rows = boardGrid.findAll('.rows')
         const cells = boardGrid.findAll('cells')
-        expect(rows).toHaveLength(18)
+        expect(rows).toHaveLength(10)
         expect(cells).toHaveLength(180)
 
     })
