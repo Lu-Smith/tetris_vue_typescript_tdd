@@ -21,10 +21,10 @@ describe('GameContainer', () => {
         expect(blockContainer.exists()).toBe(true)
         const blockGrid = wrapper.find('div.block')
         expect(blockGrid.exists()).toBe(true)
-        const rows = blockGrid.findAll('.rows')
-        const cells = blockGrid.findAll('.cells')
-        expect(rows).toHaveLength(10)
-        expect(cells.length).toBe(180)
+        const rows = blockGrid.findAll('.block-rows')
+        const cells = blockGrid.findAll('.block-cells')
+        expect(rows).toHaveLength(4)
+        expect(cells.length).toBe(8)
 
 
 
