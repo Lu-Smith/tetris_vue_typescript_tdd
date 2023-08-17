@@ -3,8 +3,13 @@ import GameContainer from './GameContainer.vue';
 </script>
 
 <template>
-    <h2>Tetris</h2>
-    <h3>level 1</h3>
+    <h1>Tetris</h1>
+    <div class="level-timer-container">
+        <h2>level 1</h2>
+        <div class="timer-container">
+        00:00
+        </div>
+    </div>
     <button class="start">Start</button>
     <button class="pause">Pause</button>
     <div class="result-container">
@@ -13,4 +18,6 @@ import GameContainer from './GameContainer.vue';
     </div>
     <GameContainer />
 </template>
+
+<style></style>
 

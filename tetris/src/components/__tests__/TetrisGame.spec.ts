@@ -7,12 +7,16 @@ describe('TetrisGame', () => {
     it('renders all elements correctly', () => {
         const wrapper = mount(TetrisGameVue)
 
-        const titleElement = wrapper.find('h2')
+        const titleElement = wrapper.find('h1')
         expect(titleElement.exists()).toBe(true)
         expect(titleElement.text()).toContain('Tetris')
 
-        const levelElement = wrapper.find('h3')
+        const levelElement = wrapper.find('h2')
         expect(levelElement.exists()).toBe(true)
+
+         //display timer
+         const timerContainer = wrapper.find('div.timer-container')
+         expect(timerContainer.exists()).toBe(true)
 
         const startButton = wrapper.find('button.start')
         expect(startButton.exists()).toBe(true)
