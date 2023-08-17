@@ -26,7 +26,9 @@ describe('GameContainer', () => {
         expect(rows).toHaveLength(4)
         expect(cells.length).toBe(8)
 
-
-
+        //display timer
+        const timerContainer = wrapper.find('div.timer-container')
+        expect(timerContainer.exists()).toBe(true)
+    
     })
 })
