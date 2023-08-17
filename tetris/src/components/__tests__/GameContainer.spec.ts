@@ -12,9 +12,9 @@ describe('GameContainer', () => {
         const boardGrid = wrapper.find('div.board')
         expect(boardGrid.exists()).toBe(true)
         const rows = boardGrid.findAll('.rows')
-        const cells = boardGrid.findAll('cells')
+        const cells = boardGrid.findAll('.cells')
         expect(rows).toHaveLength(10)
-        expect(cells).toHaveLength(180)
+        expect(cells.length).toBe(180)
 
     })
 })
