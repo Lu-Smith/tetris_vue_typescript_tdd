@@ -11,10 +11,22 @@ describe('GameContainer', () => {
         expect(boardContainer.exists()).toBe(true)
         const boardGrid = wrapper.find('div.board')
         expect(boardGrid.exists()).toBe(true)
-        const rows = boardGrid.findAll('.rows')
-        const cells = boardGrid.findAll('.cells')
+        const boardRows = boardGrid.findAll('.board-rows')
+        const boardCells = boardGrid.findAll('.board-cells')
+        expect(boardRows).toHaveLength(10)
+        expect(boardCells.length).toBe(180)
+
+        //display block
+        const blockContainer = wrapper.find('div.block-container')
+        expect(blockContainer.exists()).toBe(true)
+        const blockGrid = wrapper.find('div.block')
+        expect(blockGrid.exists()).toBe(true)
+        const rows = blockGrid.findAll('.rows')
+        const cells = blockGrid.findAll('.cells')
         expect(rows).toHaveLength(10)
         expect(cells.length).toBe(180)
+
+
 
     })
 })
