@@ -21,6 +21,35 @@ a,
   }
 }
 
+h1 {
+  text-align: center;
+}
+
+.level-timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  padding: 6px 15px;
+  border-radius: 5px;
+  border: none;
+}
+
+.result-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .Footer {
   position: fixed;
   bottom: 0;

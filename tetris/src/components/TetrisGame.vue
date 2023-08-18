@@ -10,8 +10,10 @@ import GameContainer from './GameContainer.vue';
         00:00
         </div>
     </div>
-    <button class="start">Start</button>
-    <button class="pause">Pause</button>
+    <div class="button-container">
+        <button class="start">Start</button>
+        <button class="pause">Pause</button>
+    </div>
     <div class="result-container">
         <div class="score">Score: 0</div>
         <div class="best-score">Your best score:</div>
@@ -19,5 +21,7 @@ import GameContainer from './GameContainer.vue';
     <GameContainer />
 </template>
 
-<style></style>
+<style>
+
+</style>
 
