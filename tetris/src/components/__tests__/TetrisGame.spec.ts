@@ -7,16 +7,22 @@ describe('TetrisGame', () => {
     it('renders all elements correctly', () => {
         const wrapper = mount(TetrisGameVue)
 
+        //display title
         const titleElement = wrapper.find('h1')
         expect(titleElement.exists()).toBe(true)
         expect(titleElement.text()).toContain('Tetris')
 
+        //display level-timer
+        const levelTimerContainer = wrapper.find('div.level-timer-container')
+        expect(levelTimerContainer.exists()).toBe(true)
+        const timerContainer = wrapper.find('div.timer-container')
+        expect(timerContainer.exists()).toBe(true)
         const levelElement = wrapper.find('h2')
         expect(levelElement.exists()).toBe(true)
 
-         //display timer
-         const timerContainer = wrapper.find('div.timer-container')
-         expect(timerContainer.exists()).toBe(true)
+        //display buttons
+        const buttonContainer = wrapper.find('div.button-container')
+        expect(buttonContainer.exists()).toBe(true)
 
         const startButton = wrapper.find('button.start')
         expect(startButton.exists()).toBe(true)
@@ -26,6 +32,7 @@ describe('TetrisGame', () => {
         expect(pauseButton.exists()).toBe(true)
         expect(pauseButton.text()).toContain('Pause')
 
+        //display result
         const resultContainer = wrapper.find('div.result-container')
         expect(resultContainer.exists()).toBe(true)
         const scoreElement = resultContainer.find('div.score')
@@ -33,6 +40,7 @@ describe('TetrisGame', () => {
         const bestScoreElement = resultContainer.find('div.best-score')
         expect(bestScoreElement.exists()).toBe(true)
 
+         //display a game board
         const gameContainer = wrapper.findComponent(GameContainerVue)
         expect(gameContainer.exists()).toBe(true)
 
