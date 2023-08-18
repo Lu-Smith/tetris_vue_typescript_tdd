@@ -44,5 +44,19 @@ describe('TetrisGame', () => {
         const gameContainer = wrapper.findComponent(GameContainerVue)
         expect(gameContainer.exists()).toBe(true)
 
+    }),
+
+    it('start button start the game', async () => {
+        const wrapper = mount(TetrisGameVue)
+
+        //starts the timer
+        const startButton = wrapper.find('button.start')
+        await startButton.trigger('click')
+        await wrapper.vm.$nextTick()
+
+        const timerElement = wrapper.find('timer')
+        expect(wrapper.vm.timerElement).toBe(true)
+
+
     })
 })
