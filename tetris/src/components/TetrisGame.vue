@@ -1,13 +1,36 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import GameContainer from './GameContainer.vue';
-const timer = ref('00:00')
+
+
+const timer = ref<string | number>('00:00')
+const minutes = ref(0)
+const seconds = ref(0)
+const interval = ref<null | number>(null) 
+
 
 const startGame = () => {
-    timer.value = '00:01'
+    interval.value = setInterval(() => {
+        if(minutes.value < 10) {
+            if(seconds.value < 10) {
+                timer.value = `0${minutes.value}:0${seconds.value}`
+            } else {
+                timer.value = `0${minutes.value}:${seconds.value}`
+            }
+        } else {
+            if(seconds.value < 10) {
+                timer.value = `${minutes.value}:0${seconds.value}`
+            } else {
+                timer.value = `${minutes.value}:${seconds.value}`
+            }
+        }
+        seconds.value += 1;
+        if (seconds.value === 60) {
+            minutes.value += 1;
+            seconds.value = 0;
+        }
+    }, 1000)
 }
-
-
 </script>
 
 <template>

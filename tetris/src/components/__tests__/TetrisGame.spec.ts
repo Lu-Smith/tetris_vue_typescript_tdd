@@ -54,7 +54,7 @@ describe('TetrisGame', () => {
         await startButton.trigger('click')
         await wrapper.vm.$nextTick()
 
-        expect((wrapper.vm as any).timer).toBe('00:01')
+        expect((wrapper.vm as any).seconds).toBe(1)
 
 
     })
