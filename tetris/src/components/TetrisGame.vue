@@ -1,5 +1,13 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import GameContainer from './GameContainer.vue';
+const timer = ref('00:00')
+
+const startGame = () => {
+    timer.value = '00:01'
+}
+
+
 </script>
 
 <template>
@@ -7,11 +15,11 @@ import GameContainer from './GameContainer.vue';
     <div class="level-timer-container">
         <h2>level 1</h2>
         <div class="timer-container">
-        00:00
+        {{ timer }}
         </div>
     </div>
     <div class="button-container">
-        <button class="start">Start</button>
+        <button class="start" @click="startGame">Start</button>
         <button class="pause">Pause</button>
     </div>
     <div class="result-container">
