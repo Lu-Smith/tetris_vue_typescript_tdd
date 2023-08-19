@@ -52,10 +52,9 @@ describe('TetrisGame', () => {
         //starts the timer
         const startButton = wrapper.find('button.start')
         await startButton.trigger('click')
-        await wrapper.vm.$nextTick()
+        await new Promise(resolve => setTimeout(resolve, 1100));
 
         expect((wrapper.vm as any).seconds).toBe(1)
-
 
     })
 })
