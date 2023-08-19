@@ -46,7 +46,7 @@ describe('TetrisGame', () => {
 
     }),
 
-    it('start button start the game', async () => {
+    it('start button start the timer', async () => {
         const wrapper = mount(TetrisGameVue)
 
         //starts the timer
@@ -55,6 +55,22 @@ describe('TetrisGame', () => {
         await new Promise(resolve => setTimeout(resolve, 1100));
 
         expect((wrapper.vm as any).seconds).toBe(1)
+    }),
 
-    })
+    
+    it('change level every 2 minutes of playing', async () => {
+        const wrapper = mount(TetrisGameVue)
+
+        //change lvel
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+
+        await new Promise(resolve => setTimeout(resolve, 120000));
+
+        expect((wrapper.vm as any).seconds).toBe(0)
+        expect((wrapper.vm as any).minutes).toBe(1)
+
+        const levelElement = wrapper.find('h2')
+        expect(levelElement.text()).toBe('level 2')
+    }, 200000);
 })
