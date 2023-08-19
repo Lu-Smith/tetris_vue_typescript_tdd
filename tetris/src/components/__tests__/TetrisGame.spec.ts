@@ -72,5 +72,5 @@ describe('TetrisGame', () => {
 
         const levelElement = wrapper.find('h2')
         expect(levelElement.text()).toBe('level 2')
-    }, 200000);
+    }, 150000);
 })
