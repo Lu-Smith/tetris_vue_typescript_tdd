@@ -7,6 +7,7 @@ const timer = ref<string | number>('00:00')
 const minutes = ref(0)
 const seconds = ref(0)
 const interval = ref<null | number>(null) 
+const level = ref(1)
 
 
 const startGame = () => {
@@ -28,6 +29,7 @@ const startGame = () => {
         if (seconds.value === 60) {
             minutes.value += 1;
             seconds.value = 0;
+            level.value += 1;
         }
     }, 1000)
 }
@@ -36,7 +38,7 @@ const startGame = () => {
 <template>
     <h1>Tetris</h1>
     <div class="level-timer-container">
-        <h2>level 1</h2>
+        <h2>level {{level}}</h2>
         <div class="timer-container">
         {{ timer }}
         </div>
