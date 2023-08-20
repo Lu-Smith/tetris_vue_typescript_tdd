@@ -68,7 +68,7 @@ describe('TetrisGame', () => {
         await new Promise(resolve => setTimeout(resolve, 120000));
 
         expect((wrapper.vm as any).seconds).toBe(0)
-        expect((wrapper.vm as any).minutes).toBe(1)
+        expect((wrapper.vm as any).minutes).toBe(2)
 
         const levelElement = wrapper.find('h2')
         expect(levelElement.text()).toBe('level 2')

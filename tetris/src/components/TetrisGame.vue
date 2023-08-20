@@ -30,8 +30,8 @@ const startGame = () => {
             minutes.value += 1;
             seconds.value = 0;
         }
-        if (minutes.value === 2) {
-            level.value = 2;
+         if (minutes.value % 2 === 0 && minutes.value != 0) {
+                level.value = minutes.value / 2 + 1;
         }
     }, 1000)
 }
