@@ -79,7 +79,9 @@ describe('TetrisGame', () => {
         const pauseButton = wrapper.find('button.pause');
         await pauseButton.trigger('click');
 
-        expect(wrapper.vm.timerPaused).toBe(true);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        expect((wrapper.vm as any).interval).toBeNull();
 
     });
 })

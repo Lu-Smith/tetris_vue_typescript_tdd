@@ -35,6 +35,10 @@ const startGame = () => {
         }
     }, 1000)
 }
+
+const gamePaused = () => {
+    clearInterval(interval.value!) 
+}
 </script>
 
 <template>
@@ -47,7 +51,7 @@ const startGame = () => {
     </div>
     <div class="button-container">
         <button class="start" @click="startGame">Start</button>
-        <button class="pause">Pause</button>
+        <button class="pause" @click="gamePaused">Pause</button>
     </div>
     <div class="result-container">
         <div class="score">Score: 0</div>
