@@ -8,10 +8,12 @@ const minutes = ref(0)
 const seconds = ref(0)
 const interval = ref<null | number>(null) 
 const level = ref(1)
+const startButton = ref('Start')
 
 
 const startGame = () => {
     clearInterval(interval.value!) 
+    startButton.value = 'Restart'
     interval.value = setInterval(() => {
         if(minutes.value < 10) {
             if(seconds.value < 10) {
@@ -51,7 +53,7 @@ const gamePaused = () => {
         </div>
     </div>
     <div class="button-container">
-        <button class="start" @click="startGame">Start</button>
+        <button class="start" @click="startGame">{{ startButton }}</button>
         <button class="pause" @click="gamePaused">Pause</button>
     </div>
     <div class="result-container">
