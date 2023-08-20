@@ -11,6 +11,7 @@ const level = ref(1)
 
 
 const startGame = () => {
+    clearInterval(interval.value!) 
     interval.value = setInterval(() => {
         if(minutes.value < 10) {
             if(seconds.value < 10) {
