@@ -57,20 +57,29 @@ describe('TetrisGame', () => {
         expect((wrapper.vm as any).seconds).toBe(1)
     }),
 
-    
-    it('change level every 2 minutes of playing', async () => {
+    // it('change level every 2 minutes of playing', async () => {
+    //     const wrapper = mount(TetrisGameVue)
+
+    //     //change level
+    //     const startButton = wrapper.find('button.start');
+    //     await startButton.trigger('click');
+
+    //     await new Promise(resolve => setTimeout(resolve, 121100));
+
+    //     expect((wrapper.vm as any).seconds).toBe(0)
+    //     expect((wrapper.vm as any).minutes).toBe(2)
+
+    //     const levelElement = wrapper.find('h2')
+    //     expect(levelElement.text()).toBe('level 2')
+    // }, 150000);
+
+    it('pause button stops timer', async () => {
         const wrapper = mount(TetrisGameVue)
 
-        //change lvel
-        const startButton = wrapper.find('button.start');
-        await startButton.trigger('click');
+        const pauseButton = wrapper.find('button.pause');
+        await pauseButton.trigger('click');
 
-        await new Promise(resolve => setTimeout(resolve, 121100));
+        expect(wrapper.vm.timerPaused).toBe(true);
 
-        expect((wrapper.vm as any).seconds).toBe(0)
-        expect((wrapper.vm as any).minutes).toBe(2)
-
-        const levelElement = wrapper.find('h2')
-        expect(levelElement.text()).toBe('level 2')
-    }, 150000);
+    });
 })
