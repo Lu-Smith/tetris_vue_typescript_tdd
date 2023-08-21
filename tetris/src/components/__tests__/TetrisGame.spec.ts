@@ -83,13 +83,13 @@ describe('TetrisGame', () => {
         expect((wrapper.vm as any).interval).toBeNull();
     });
 
-    it('start button changes to restart changes', async () => {
+    it('start button changes to continue changes', async () => {
         const wrapper = mount(TetrisGameVue)
 
+        const pauseButton = wrapper.find('button.pause');
+        await pauseButton.trigger('click');
+        
         const startButton = wrapper.find('button.start');
-        await startButton.trigger('click');
-
-        expect(startButton.text()).toContain('Restart');
-
+        expect(startButton.text()).toContain('Continue');
     });
 })

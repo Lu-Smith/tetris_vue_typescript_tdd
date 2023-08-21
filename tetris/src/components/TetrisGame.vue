@@ -13,34 +13,34 @@ const startButton = ref('Start')
 
 const startGame = () => {
     clearInterval(interval.value!) 
-    startButton.value = 'Restart'
     interval.value = setInterval(() => {
-        if(minutes.value < 10) {
-            if(seconds.value < 10) {
-                timer.value = `0${minutes.value}:0${seconds.value}`
-            } else {
-                timer.value = `0${minutes.value}:${seconds.value}`
-            }
+    if(minutes.value < 10) {
+        if(seconds.value < 10) {
+            timer.value = `0${minutes.value}:0${seconds.value}`
         } else {
-            if(seconds.value < 10) {
-                timer.value = `${minutes.value}:0${seconds.value}`
-            } else {
-                timer.value = `${minutes.value}:${seconds.value}`
-            }
+            timer.value = `0${minutes.value}:${seconds.value}`
         }
-        seconds.value += 1;
-        if (seconds.value === 60) {
-            minutes.value += 1;
-            seconds.value = 0;
+    } else {
+        if(seconds.value < 10) {
+            timer.value = `${minutes.value}:0${seconds.value}`
+        } else {
+            timer.value = `${minutes.value}:${seconds.value}`
         }
-         if (minutes.value % 2 === 0 && minutes.value != 0) {
-                level.value = minutes.value / 2 + 1;
-        }
+    }
+    seconds.value += 1;
+    if (seconds.value === 60) {
+        minutes.value += 1;
+        seconds.value = 0;
+    }
+        if (minutes.value % 2 === 0 && minutes.value != 0) {
+            level.value = minutes.value / 2 + 1;
+    }
     }, 1000)
 }
 
 const gamePaused = () => {
     clearInterval(interval.value!) 
+    startButton.value = 'Continue'
 }
 </script>
 

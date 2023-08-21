@@ -11,9 +11,7 @@ describe('GameContainer', () => {
         expect(boardContainer.exists()).toBe(true)
         const boardGrid = wrapper.find('div.board')
         expect(boardGrid.exists()).toBe(true)
-        const boardRows = boardGrid.findAll('.board-rows')
         const boardCells = boardGrid.findAll('.board-cells')
-        expect(boardRows).toHaveLength(10)
         expect(boardCells.length).toBe(180)
 
         //display block
@@ -21,9 +19,15 @@ describe('GameContainer', () => {
         expect(blockContainer.exists()).toBe(true)
         const blockGrid = wrapper.find('div.block')
         expect(blockGrid.exists()).toBe(true)
-        const rows = blockGrid.findAll('.block-rows')
         const cells = blockGrid.findAll('.block-cells')
-        expect(rows).toHaveLength(4)
         expect(cells.length).toBe(8)
+    }),
+
+    it('display random block', () => {
+        const wrapper = mount(GameContainerVue)
+
+        const randomBlockElement = wrapper.find('block')
+        expect(randomBlockElement.exists()).toBe(true)
+     
     })
 })

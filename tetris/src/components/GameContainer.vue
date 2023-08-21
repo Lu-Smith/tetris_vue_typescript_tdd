@@ -1,7 +1,26 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-const boardRows = ref(Array.from({length: 10}, () => Array(18).fill('1')))
-const blockRows = ref(Array.from({length: 4}, () => Array(2).fill('1')))
+const blockRows = ref<number[][]>([]);
+const numBlockRows = 8;
+let currentBlockNumber = 1;
+
+for (let i = 0; i < numBlockRows; i++) {
+    const blockRow = [];
+    blockRow.push(currentBlockNumber);
+    currentBlockNumber++;
+    blockRows.value.push(blockRow);
+}
+
+const boardRows = ref<number[][]>([]);
+const numBoardRows = 180;
+let currentBoardNumber = 1;
+
+for (let i = 0; i < numBoardRows; i++) {
+    const boardRow = [];
+    boardRow.push(currentBoardNumber);
+    currentBoardNumber++;
+    boardRows.value.push(boardRow);
+}
 </script>
 
 <template>
