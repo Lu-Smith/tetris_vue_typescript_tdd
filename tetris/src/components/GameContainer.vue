@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 const boardRows = ref(Array.from({length: 10}, () => Array(18).fill('0')))
-const blockRows = ref(Array.from({ length: 4 }, () => Array(3).fill('0')));
+const randomBackgroundColor = computed(() => {
+  const hue = Math.floor(Math.random() * 360); 
+  return `hsl(${hue}, 50%, 60%)`; 
+});
 
 const tetrisShapes = [
   [[1, 1, 1, 1]],                   // I-shape
@@ -25,7 +28,11 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
         <div class="block-container">
         <div class="block">
             <div class="block-rows" v-for="(blockRow, rowIndex) in currentTetrisBlock " :key="rowIndex">
-                <div class="block-cells" v-for="(blockCell, cellIndex) in blockRow" :key="cellIndex">
+                <div 
+                class="block-cells" 
+                v-for="(blockCell, cellIndex) in blockRow" 
+                :key="cellIndex"
+                :class="{ backgroundColor: blockCell === 1 ? 'red' : 'transparent' }">
                     {{ blockCell }}
                 </div>
             </div>

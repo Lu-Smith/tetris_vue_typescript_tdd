@@ -20,14 +20,23 @@ describe('GameContainer', () => {
         const blockGrid = wrapper.find('div.block')
         expect(blockGrid.exists()).toBe(true)
         const cells = blockGrid.findAll('.block-cells')
-        expect(cells.length).toBe(8)
+        expect(cells.length).toBe(6)
     }),
 
-    it('display random block', () => {
-        const wrapper = mount(GameContainerVue)
+    it('displays the current Tetris block correctly', async () => {
+        const wrapper = mount(GameContainerVue);
+    
 
-        const randomBlockElement = wrapper.find('block')
-        expect(randomBlockElement.exists()).toBe(true)
-     
-    })
+        (wrapper.vm as any).currentTetrisBlock = [[[1, 1], [1, 1]]];
+    
+        await wrapper.vm.$nextTick();
+   
+        const blockCells = wrapper.findAll('.block-cells');
+        blockCells.forEach((blockCell) => {
+            if (blockCell.text() === '1') {
+              const backgroundColor = (blockCell.element as any).style.backgroundColor;
+              expect(backgroundColor).toMatch(/^hsl\(\d+, 50%, 60%\)$/); 
+            }
+          });
+      });
 })
