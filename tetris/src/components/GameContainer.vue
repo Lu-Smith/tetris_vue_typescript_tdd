@@ -26,16 +26,14 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
 
 <template>
         <div class="block-container">
-        <div class="block">
             <div class="block-rows" v-for="(blockRow, rowIndex) in currentTetrisBlock " :key="rowIndex">
                 <div 
                 class="block-cells" 
                 v-for="(blockCell, cellIndex) in blockRow" 
                 :key="cellIndex"
-                :class="{ backgroundColor: blockCell === 1 ? 'red' : 'transparent' }">
+                :style="{ backgroundColor: blockCell === 1 ? randomBackgroundColor : 'transparent' }">
                     {{ blockCell }}
                 </div>
-            </div>
         </div>
     </div>
     <div class="board-container">
@@ -67,7 +65,6 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
 .block-cells {
   width: 30px; 
   height: 30px; 
-  background-color: transparent;
   border: 1px solid #ddd;
   display: flex;
     align-items: center;

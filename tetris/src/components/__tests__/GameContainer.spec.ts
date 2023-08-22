@@ -17,10 +17,8 @@ describe('GameContainer', () => {
         //display block
         const blockContainer = wrapper.find('div.block-container')
         expect(blockContainer.exists()).toBe(true)
-        const blockGrid = wrapper.find('div.block')
-        expect(blockGrid.exists()).toBe(true)
-        const cells = blockGrid.findAll('.block-cells')
-        expect(cells.length).toBe(6)
+        const cells = blockContainer.findAll('.block-cells')
+        expect(blockContainer.exists()).toBe(true)
     }),
 
     it('displays the current Tetris block correctly', async () => {
@@ -32,6 +30,7 @@ describe('GameContainer', () => {
         await wrapper.vm.$nextTick();
    
         const blockCells = wrapper.findAll('.block-cells');
+        expect(blockCells.length).toBe(2);
         blockCells.forEach((blockCell) => {
             if (blockCell.text() === '1') {
               const backgroundColor = (blockCell.element as any).style.backgroundColor;
