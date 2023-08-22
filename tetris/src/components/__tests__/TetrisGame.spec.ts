@@ -114,11 +114,9 @@ describe('TetrisGame', () => {
         expect(blockCells.length).toBe(1);
         expect(boardCells.length).toBe(180);
 
-        const boardCellValues = (boardCells as any).wrappers.map((cell: any) => Number(cell.text()));
-        const numberOfOnes = boardCellValues.filter((value: any) => value === 1).length;
-        expect(numberOfOnes).toBeGreaterThanOrEqual(4);
-
-        //display block in the board game
-
+         //display block in the board game
+         const boardCellValues = boardCells.map((boardCell) => Number(boardCell.text()));
+         const numberOfOnes = boardCellValues.filter((value) => value === 1).length;
+         expect(numberOfOnes).toBeGreaterThanOrEqual(4);
     });
 })
