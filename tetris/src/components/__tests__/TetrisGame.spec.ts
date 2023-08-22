@@ -110,8 +110,13 @@ describe('TetrisGame', () => {
     
         const blockCells = gameContainer.findAll('.block-cells');
         const boardCells = gameContainer.findAll('.board-cells');
+        console.log('boardCells:', boardCells);
         expect(blockCells.length).toBe(1);
-        expect(boardCells.length).toBeGreaterThan(0);
+        expect(boardCells.length).toBe(180);
+
+        const boardCellValues = (boardCells as any).wrappers.map((cell: any) => Number(cell.text()));
+        const numberOfOnes = boardCellValues.filter((value: any) => value === 1).length;
+        expect(numberOfOnes).toBeGreaterThanOrEqual(4);
 
         //display block in the board game
 

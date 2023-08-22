@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
   gameStarted: Boolean,
@@ -26,6 +26,21 @@ function getRandomTetrisShape() {
 }
 
 const currentTetrisBlock = ref(getRandomTetrisShape());
+
+watch(
+  () => props.gameStarted,
+  (newVal, oldVal) => {
+    if (newVal) {
+      for (let row = 0; row < currentTetrisBlock.value.length; row++) {
+        for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
+          if (currentTetrisBlock.value[row][col] === 1) {
+            boardRows.value[row + 4][col] = 1;
+          }
+        }
+      }
+    }
+  }
+);
 </script>
 
 <template>
@@ -44,10 +59,10 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
         <div class="board">
             <div class="board-rows" v-for="(boardRow, rowIndex) in boardRows" :key="rowIndex">
                 <div 
-                v-if="gameStarted" 
                 class="board-cells" 
                 v-for="(boardCell, cellIndex) in boardRow" 
-                :key="cellIndex">
+                :key="cellIndex"
+                :style="{ backgroundColor: boardCell === 1 ? randomBackgroundColor : 'transparent' }">
                     {{ boardCell }}
                 </div>
             </div>
