@@ -78,20 +78,22 @@ watch(
 }
 
 .block {
-  display: grid;
-  grid-template-columns: repeat(4, 30px); 
-  grid-gap: 1px;
-  border: 1px solid #000;
-  background-color: rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-columns: repeat(4, 30px); 
+    grid-gap: 1px;
+    border: 1px solid #000;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .block-cells {
-  width: 30px; 
-  height: 30px; 
-  border: 1px solid #ddd;
-  display: flex;
+    width: 30px; 
+    height: 30px; 
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: flex;
     align-items: center;
     justify-content: center;
+    color: transparent;
+    border-radius: 3px;
 }
 
 .board-container {
@@ -107,15 +109,17 @@ watch(
   grid-gap: 1px;
   border: 1px solid #000;
   background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
 }
 
 .board-cells {
-  width: 30px; 
-  height: 30px; 
-  background-color: transparent;
-  border: 1px solid #ddd;
-  display: flex;
+    width: 30px; 
+    height: 30px; 
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 3px;
 }
 </style>
