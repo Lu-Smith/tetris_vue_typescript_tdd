@@ -1,32 +1,30 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-const blockRows = ref<number[][]>([]);
-const numBlockRows = 8;
-let currentBlockNumber = 1;
+const boardRows = ref(Array.from({length: 10}, () => Array(18).fill('0')))
+const blockRows = ref(Array.from({ length: 4 }, () => Array(3).fill('0')));
 
-for (let i = 0; i < numBlockRows; i++) {
-    const blockRow = [];
-    blockRow.push(currentBlockNumber);
-    currentBlockNumber++;
-    blockRows.value.push(blockRow);
+const tetrisShapes = [
+  [[1, 1, 1, 1]],                   // I-shape
+  [[1, 1], [1, 1]],                // O-shape
+  [[1, 1, 1], [0, 1, 0]],          // T-shape
+  [[1, 1, 1], [1, 0, 0]],          // L-shape
+  [[1, 1, 1], [0, 0, 1]],          // J-shape
+  [[1, 1, 0], [0, 1, 1]],          // S-shape
+  [[0, 1, 1], [1, 1, 0]]           // Z-shape
+];
+
+function getRandomTetrisShape() {
+  const randomIndex = Math.floor(Math.random() * tetrisShapes.length);
+  return tetrisShapes[randomIndex];
 }
 
-const boardRows = ref<number[][]>([]);
-const numBoardRows = 180;
-let currentBoardNumber = 1;
-
-for (let i = 0; i < numBoardRows; i++) {
-    const boardRow = [];
-    boardRow.push(currentBoardNumber);
-    currentBoardNumber++;
-    boardRows.value.push(boardRow);
-}
+const currentTetrisBlock = ref(getRandomTetrisShape());
 </script>
 
 <template>
         <div class="block-container">
         <div class="block">
-            <div class="block-rows" v-for="(blockRow, rowIndex) in blockRows" :key="rowIndex">
+            <div class="block-rows" v-for="(blockRow, rowIndex) in currentTetrisBlock " :key="rowIndex">
                 <div class="block-cells" v-for="(blockCell, cellIndex) in blockRow" :key="cellIndex">
                     {{ blockCell }}
                 </div>
