@@ -94,7 +94,7 @@ describe('TetrisGame', () => {
     });
 
     it('Tetris block appears in a board game after click at start button', async () => {
-        const wrapper = mount(GameContainerVue);
+        const wrapper = mount(TetrisGameVue)
 
         //display start button
         const startButton = wrapper.find('button.start');
@@ -105,6 +105,8 @@ describe('TetrisGame', () => {
         //display correct block
         const gameContainer = wrapper.findComponent(GameContainerVue);
         (gameContainer.vm as any).currentTetrisBlock = [[[1, 1, 1, 1]]];
+
+        await wrapper.vm.$nextTick();
     
         const blockCells = gameContainer.findAll('.block-cells');
         const boardCells = gameContainer.findAll('.board-cells');
@@ -113,6 +115,5 @@ describe('TetrisGame', () => {
 
         //display block in the board game
 
-        
     });
 })
