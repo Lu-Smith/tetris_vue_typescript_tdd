@@ -9,10 +9,15 @@ const seconds = ref(0)
 const interval = ref<null | number>(null) 
 const level = ref(1)
 const startButton = ref('Start')
+const gameStarted = ref(false)
 
+const gameBoardStarted = () => {
+    gameStarted.value = true
+}
 
 const startGame = () => {
     clearInterval(interval.value!) 
+    gameBoardStarted()
     interval.value = setInterval(() => {
     if(minutes.value < 10) {
         if(seconds.value < 10) {
@@ -60,7 +65,7 @@ const gamePaused = () => {
         <div class="score">Score: 0</div>
         <div class="best-score">Your best score:</div>
     </div>
-    <GameContainer />
+    <GameContainer :gameStarted="gameStarted"/>
 </template>
 
 <style>

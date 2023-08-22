@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
+
+const props = defineProps({
+  gameStarted: Boolean,
+});
 const boardRows = ref(Array.from({length: 10}, () => Array(18).fill('0')))
 const randomBackgroundColor = computed(() => {
   const hue = Math.floor(Math.random() * 360); 
@@ -39,7 +43,11 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
     <div class="board-container">
         <div class="board">
             <div class="board-rows" v-for="(boardRow, rowIndex) in boardRows" :key="rowIndex">
-                <div class="board-cells" v-for="(boardCell, cellIndex) in boardRow" :key="cellIndex">
+                <div 
+                v-if="gameStarted" 
+                class="board-cells" 
+                v-for="(boardCell, cellIndex) in boardRow" 
+                :key="cellIndex">
                     {{ boardCell }}
                 </div>
             </div>
