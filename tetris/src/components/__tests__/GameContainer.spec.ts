@@ -39,16 +39,4 @@ describe('GameContainer', () => {
           });
     });
 
-    it('Tetris block appears in a board game after click at start button', async () => {
-        const wrapper = mount(GameContainerVue);
-    
-
-        (wrapper.vm as any).currentTetrisBlock = [[[1, 1, 1, 1]]];
-    
-        await wrapper.vm.$nextTick();
-   
-        const blockCells = wrapper.findAll('.block-cells');
-        expect(blockCells.length).toBe(1);
-        
-    });
 })

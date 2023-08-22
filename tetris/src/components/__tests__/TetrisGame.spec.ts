@@ -88,8 +88,31 @@ describe('TetrisGame', () => {
 
         const pauseButton = wrapper.find('button.pause');
         await pauseButton.trigger('click');
-        
+
         const startButton = wrapper.find('button.start');
         expect(startButton.text()).toContain('Continue');
+    });
+
+    it('Tetris block appears in a board game after click at start button', async () => {
+        const wrapper = mount(GameContainerVue);
+
+        //display start button
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+
+        await wrapper.vm.$nextTick();
+    
+        //display correct block
+        const gameContainer = wrapper.findComponent(GameContainerVue);
+        (gameContainer.vm as any).currentTetrisBlock = [[[1, 1, 1, 1]]];
+    
+        const blockCells = gameContainer.findAll('.block-cells');
+        const boardCells = gameContainer.findAll('.board-cells');
+        expect(blockCells.length).toBe(1);
+        expect(boardCells.length).toBeGreaterThan(0);
+
+        //display block in the board game
+
+        
     });
 })
