@@ -7,7 +7,7 @@ const randomBackgroundColor = computed(() => {
 });
 
 const tetrisShapes = [
-  [[1, 1, 1, 1]],                   // I-shape
+  [[1, 1, 1, 1]],                  // I-shape
   [[1, 1], [1, 1]],                // O-shape
   [[1, 1, 1], [0, 1, 0]],          // T-shape
   [[1, 1, 1], [1, 0, 0]],          // L-shape
