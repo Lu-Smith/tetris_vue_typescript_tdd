@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 
-const props = defineProps({
-  gameStarted: Boolean,
-});
-const boardRows = ref(Array.from({length: 10}, () => Array(18).fill('0')))
+const props = defineProps(
+    { 
+        gameStarted: Boolean,
+        timer: Number 
+    }
+);
+
+const boardRows = ref(Array.from({length: 10}, () => Array(18).fill(0)))
 const randomBackgroundColor = computed(() => {
   const hue = Math.floor(Math.random() * 360); 
   return `hsl(${hue}, 50%, 60%)`; 
@@ -34,7 +38,12 @@ watch(
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            boardRows.value[row + 4][col] = 1;
+            if (timer.value != '00:00') {
+                boardRows.value[row + 5][col] = 1;
+            } else {
+                boardRows.value[row + 4][col] = 1;
+            }
+           
           }
         }
       }
@@ -67,6 +76,7 @@ watch(
                 </div>
             </div>
         </div>
+        {{ timer }}
     </div>
 </template>
 
