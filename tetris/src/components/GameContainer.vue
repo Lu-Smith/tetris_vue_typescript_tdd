@@ -4,7 +4,7 @@ import { ref, computed, watch } from 'vue'
 const props = defineProps(
     { 
         gameStarted: Boolean,
-        timer: Number 
+        seconds: Number 
     }
 );
 
@@ -38,13 +38,9 @@ watch(
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (timer.value != '00:00') {
-                boardRows.value[row + 5][col] = 1;
-            } else {
-                boardRows.value[row + 4][col] = 1;
+                boardRows.value[row + 4][col + props.seconds] = 1;
+
             }
-           
-          }
         }
       }
     }
@@ -76,7 +72,7 @@ watch(
                 </div>
             </div>
         </div>
-        {{ timer }}
+        {{ seconds }}
     </div>
 </template>
 

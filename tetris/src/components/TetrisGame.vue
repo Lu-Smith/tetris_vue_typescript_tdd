@@ -65,7 +65,7 @@ const gamePaused = () => {
         <div class="score">Score: 0</div>
         <div class="best-score">Your best score:</div>
     </div>
-    <GameContainer :gameStarted="gameStarted" :timer="timer"/>
+    <GameContainer :gameStarted="gameStarted" :seconds="seconds"/>
 </template>
 
 <style>
