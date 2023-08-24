@@ -32,17 +32,22 @@ function getRandomTetrisShape() {
 const currentTetrisBlock = ref(getRandomTetrisShape());
 
 watch(
-  () => props.gameStarted,
+  () => props.seconds as number, 
   (newVal, oldVal) => {
-    if (newVal) {
+    if (props.gameStarted) {
+      boardRows.value = Array.from({ length: 10 }, () => Array(18).fill(0))
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-                boardRows.value[row + 4][col + props.seconds] = 1;
-
+            if (newVal < (boardRows.value[row].length - currentTetrisBlock.value[row].length)) {
+                boardRows.value[row + 4][col + newVal - 1] = 1;
+            } else {
+                boardRows.value[row + 4][col + boardRows.value[row].length - currentTetrisBlock.value[row].length] = 1;
             }
+                
+            } 
+          }
         }
-      }
     }
   }
 );
@@ -72,7 +77,6 @@ watch(
                 </div>
             </div>
         </div>
-        {{ seconds }}
     </div>
 </template>
 

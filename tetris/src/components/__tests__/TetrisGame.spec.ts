@@ -47,7 +47,11 @@ describe('TetrisGame', () => {
     }),
 
     it('start button start the timer', async () => {
-        const wrapper = mount(TetrisGameVue)
+        const wrapper = mount(TetrisGameVue);
+        expect((wrapper.vm as any).timer).toBe('00:00');
+        expect((wrapper.vm as any).level).toBe(1);
+        expect((wrapper.vm as any).startButton).toBe('Start');
+        expect((wrapper.vm as any).gameStarted).toBe(false);
 
         //starts the timer
         const startButton = wrapper.find('button.start')
@@ -101,22 +105,27 @@ describe('TetrisGame', () => {
         await startButton.trigger('click');
 
         await wrapper.vm.$nextTick();
+
+        await wrapper.setData({ timer: '01:00', level: 2 })
+        expect((wrapper.vm as any).timer).toBe('01:00')
+    expect((wrapper.vm as any).level).toBe(2)
     
         //display correct block
         const gameContainer = wrapper.findComponent(GameContainerVue);
         (gameContainer.vm as any).currentTetrisBlock = [[[1, 1, 1, 1]]];
 
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
         await wrapper.vm.$nextTick();
     
         const blockCells = gameContainer.findAll('.block-cells');
         const boardCells = gameContainer.findAll('.board-cells');
-        console.log('boardCells:', boardCells);
         expect(blockCells.length).toBe(1);
         expect(boardCells.length).toBe(180);
 
          //display block in the board game
          const boardCellValues = boardCells.map((boardCell) => Number(boardCell.text()));
          const numberOfOnes = boardCellValues.filter((value) => value === 1).length;
-         expect(numberOfOnes).toBeGreaterThanOrEqual(4);
+         expect(numberOfOnes).toBe(4);
     });
 })
