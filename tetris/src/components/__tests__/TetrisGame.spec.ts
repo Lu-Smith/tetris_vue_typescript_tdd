@@ -134,23 +134,12 @@ describe('TetrisGame', () => {
         await startButton.trigger('click');
         await wrapper.vm.$nextTick();
 
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
         //clicked on start button
         const moveLeft = wrapper.find('leftKey');
         await moveLeft.trigger('click');
         await wrapper.vm.$nextTick();
 
-        //display correct block
-        const gameContainer = wrapper.findComponent(GameContainerVue);
-        (gameContainer.vm as any).currentTetrisBlock = [[[1, 1, 1], [0, 1, 0]]];
-
-        // await new Promise((resolve) => setTimeout(resolve, 3000));
-        await wrapper.vm.$nextTick();
-         
-        const boardCells = gameContainer.findAll('.board-cells');
-
-        // //move block left in the board game
-        // const boardCellValues = boardCells.map((boardCell) => Number(boardCell.text()));
-        // const numberOfOnes = boardCellValues.filter((value) => value === 1).length;
-        // expect(numberOfOnes).toBe(4);
     });
 })
