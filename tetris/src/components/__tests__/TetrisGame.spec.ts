@@ -126,20 +126,24 @@ describe('TetrisGame', () => {
         //  expect(numberOfOnes).toBe(4);
     });
 
-    it('Tetris block move left after click on left button', async () => {
+    it('handleKeyLeft sets moveLeft to true', () => {
         const wrapper = mount(TetrisGameVue)
-
-        //clicked on start button
-        const startButton = wrapper.find('button.start');
-        await startButton.trigger('click');
-        await wrapper.vm.$nextTick();
-
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-
-        //clicked on start button
-        const moveLeft = wrapper.find('leftKey');
-        await moveLeft.trigger('click');
-        await wrapper.vm.$nextTick();
-
-    });
+        const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+        (wrapper.vm as any).handleKeyLeft(event);
+        expect((wrapper.vm as any).moveLeft).toBe(true);
+      });
+    
+      it('handleKeyRight sets moveRight to true', () => {
+        const wrapper = mount(TetrisGameVue)
+        const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+        (wrapper.vm as any).handleKeyRight(event);
+        expect((wrapper.vm as any).moveRight).toBe(true);
+      });
+    
+      it('handleKeyDown sets moveDown to true', () => {
+        const wrapper = mount(TetrisGameVue)
+        const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        (wrapper.vm as any).handleKeyDown(event);
+        expect((wrapper.vm as any).moveDown).toBe(true);
+      });
 })

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import GameContainer from './GameContainer.vue';
 
 
@@ -10,9 +10,55 @@ const interval = ref<null | number>(null)
 const level = ref(1)
 const startButton = ref('Start')
 const gameStarted = ref(false)
+const moveLeft = ref(false)
+const moveRight = ref(false)
+const moveDown = ref(false)
 
 const gameBoardStarted = () => {
-    gameStarted.value = true
+    gameStarted.value = true;
+
+    const handleKeyLeft = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft') {
+            moveLeft.value = true;
+            event.preventDefault(); 
+        }
+    }
+
+    const handleKeyRight = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowRight') {
+            moveRight.value = true;
+            event.preventDefault(); 
+        }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowDown') {
+            moveDown.value = true;
+            event.preventDefault(); 
+        }
+    }
+
+    const handleRelease = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft') {
+            moveLeft.value = false;
+        } else if (event.key === 'ArrowRight') {
+            moveRight.value = false;
+        } else if (event.key === 'ArrowDown') {
+            moveDown.value = false;
+        }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyLeft);
+    window.addEventListener('keydown', handleKeyRight);
+    window.addEventListener('keyup', handleRelease);
+
+    onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeyDown);
+    window.removeEventListener('keydown', handleKeyLeft);
+    window.removeEventListener('keydown', handleKeyRight);
+    window.removeEventListener('keyup', handleRelease);
+})
 }
 
 const startGame = () => {
@@ -65,10 +111,12 @@ const gamePaused = () => {
         <div class="score">Score: 0</div>
         <div class="best-score">Your best score:</div>
     </div>
-    <GameContainer :gameStarted="gameStarted" :seconds="seconds"/>
+    <GameContainer 
+    :gameStarted="gameStarted" 
+    :seconds="seconds" 
+    :moveLeft="moveLeft"
+    :moveRight="moveRight"
+    :moveDown="moveDown"/>
 </template>
 
-<style>
-
-</style>
 
