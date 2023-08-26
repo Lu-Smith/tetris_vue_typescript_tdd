@@ -201,4 +201,36 @@ describe('TetrisGame', () => {
         expect((wrapper.vm as any).moveDown).toBe(true);
         expect((wrapper.vm as any).down).not.toBe(0);
     });
+
+    it('onUmounted sets left, right and down to 0', async () => {
+        const wrapper = mount(TetrisGameVue);
+
+        //display start button
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).gameStarted).toBe(true);
+   
+        const mockEventDown = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        const mockEventLeft = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+        const mockEventRight = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+
+        (wrapper.vm as any).handleKeyDown(mockEventDown);
+        (wrapper.vm as any).handleKeyLeft(mockEventLeft);
+        (wrapper.vm as any).handleKeyRight(mockEventRight);
+        
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).left).not.toBe(0);
+        expect((wrapper.vm as any).right).not.toBe(0);
+        expect((wrapper.vm as any).down).not.toBe(0);
+
+        wrapper.unmount();
+    
+        expect((wrapper.vm as any).left).toBe(0);
+        expect((wrapper.vm as any).right).toBe(0);
+        expect((wrapper.vm as any).down).toBe(0);
+  
+    });
 })
