@@ -38,30 +38,28 @@ function getRandomTetrisShape() {
 const currentTetrisBlock = ref(getRandomTetrisShape());
 
 watch(
-  () => props.seconds as number, 
-  (newVal, oldVal) => {
+  [() => props.seconds as number, () => props.left as number, () => props.right as number, () => props.down as number],
+  ([seconds, left, right, down]) => {
     if (props.gameStarted) {
       boardRows.value = Array.from({ length: 10 }, () => Array(18).fill(0))
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
-          if (currentTetrisBlock.value[row][col] === 1) {
-            if (newVal < (boardRows.value[row].length - currentTetrisBlock.value[row].length)) {
-              if (props.moveLeft && props.left) {
-              boardRows.value[row + 4 - props.left][col + newVal -1] = 1;
-              } else if (props.moveRight && props.right) {
-                boardRows.value[row + 4 + props.right][col + newVal - 1] = 1;
-              } else if (props.moveDown && props.down) {
-                boardRows.value[row + 4][col + newVal - 1 + props.down] = 1;
-              } else {
-                boardRows.value[row + 5][col + newVal - 1] = 1;
-              }
-            } else {
-                boardRows.value[row + 4][col + boardRows.value[row].length - currentTetrisBlock.value[row].length] = 1;
+          const blockValue = currentTetrisBlock.value[row][col];
+          if (blockValue === 1) {
+            const newRow = row + 4 + right - left;
+            const newCol = col + seconds - 1 + down ;
+
+            if (
+              newRow >= 0 &&
+              newRow < boardRows.value.length &&
+              newCol >= 0 &&
+              newCol < boardRows.value[0].length
+            ) {
+              boardRows.value[newRow][newCol] = blockValue;
             }
-                
-            } 
           }
         }
+      }
     }
   }
 );
