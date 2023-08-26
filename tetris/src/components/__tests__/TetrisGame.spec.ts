@@ -127,23 +127,43 @@ describe('TetrisGame', () => {
     });
 
     it('handleKeyLeft sets moveLeft to true', () => {
-        const wrapper = mount(TetrisGameVue)
+        const wrapper = mount(TetrisGameVue);
         const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
         (wrapper.vm as any).handleKeyLeft(event);
         expect((wrapper.vm as any).moveLeft).toBe(true);
       });
     
       it('handleKeyRight sets moveRight to true', () => {
-        const wrapper = mount(TetrisGameVue)
+        const wrapper = mount(TetrisGameVue);
         const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
         (wrapper.vm as any).handleKeyRight(event);
         expect((wrapper.vm as any).moveRight).toBe(true);
       });
     
       it('handleKeyDown sets moveDown to true', () => {
-        const wrapper = mount(TetrisGameVue)
+        const wrapper = mount(TetrisGameVue);
         const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
         (wrapper.vm as any).handleKeyDown(event);
         expect((wrapper.vm as any).moveDown).toBe(true);
+      });
+
+      it('handleRelease sets moveLeft, moveRight and moveDown to false', () => {
+        const wrapper = mount(TetrisGameVue);
+        const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+        (wrapper.vm as any).handleKeyLeft(event);
+        (wrapper.vm as any).handleRelease(event);
+        expect((wrapper.vm as any).moveLeft).toBe(false);
+      });
+
+      it('adds event listeners when gameBoardStarted is called', () => {
+        const wrapper = mount(TetrisGameVue);
+        (wrapper.vm as any).gameBoardStarted();
+        expect((wrapper.vm as any).eventListenersAdded).toBe(true);
+      });
+    
+      it('removes event listeners when component is unmounted', () => {
+        const wrapper = mount(TetrisGameVue);
+        wrapper.unmount();
+        expect((wrapper.vm as any).eventListenersRemoved).toBe(true);
       });
 })

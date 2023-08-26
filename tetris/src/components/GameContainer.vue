@@ -4,7 +4,13 @@ import { ref, computed, watch } from 'vue'
 const props = defineProps(
     { 
         gameStarted: Boolean,
-        seconds: Number 
+        seconds: Number,
+        moveLeft: Boolean,
+        moveRight: Boolean,
+        moveDown: Boolean,
+        left: Number,
+        right: Number,
+        down: Number,
     }
 );
 
@@ -40,7 +46,15 @@ watch(
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
             if (newVal < (boardRows.value[row].length - currentTetrisBlock.value[row].length)) {
-                boardRows.value[row + 4][col + newVal - 1] = 1;
+              if (props.moveLeft && props.left) {
+              boardRows.value[row + 4 - props.left][col + newVal -1] = 1;
+              } else if (props.moveRight && props.right) {
+                boardRows.value[row + 4 + props.right][col + newVal - 1] = 1;
+              } else if (props.moveDown && props.down) {
+                boardRows.value[row + 4][col + newVal - 1 + props.down] = 1;
+              } else {
+                boardRows.value[row + 5][col + newVal - 1] = 1;
+              }
             } else {
                 boardRows.value[row + 4][col + boardRows.value[row].length - currentTetrisBlock.value[row].length] = 1;
             }

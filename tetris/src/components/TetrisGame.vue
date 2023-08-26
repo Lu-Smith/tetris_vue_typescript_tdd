@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import GameContainer from './GameContainer.vue';
 
 
@@ -13,6 +13,9 @@ const gameStarted = ref(false)
 const moveLeft = ref(false)
 const moveRight = ref(false)
 const moveDown = ref(false)
+const left = ref(0)
+const right = ref(0)
+const down = ref(0)
 
 const gameBoardStarted = () => {
     gameStarted.value = true;
@@ -20,6 +23,7 @@ const gameBoardStarted = () => {
     const handleKeyLeft = (event: KeyboardEvent) => {
         if (event.key === 'ArrowLeft') {
             moveLeft.value = true;
+            left.value += 1
             event.preventDefault(); 
         }
     }
@@ -27,6 +31,7 @@ const gameBoardStarted = () => {
     const handleKeyRight = (event: KeyboardEvent) => {
         if (event.key === 'ArrowRight') {
             moveRight.value = true;
+            right.value += 1
             event.preventDefault(); 
         }
     }
@@ -34,32 +39,25 @@ const gameBoardStarted = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'ArrowDown') {
             moveDown.value = true;
+            down.value += 1
             event.preventDefault(); 
-        }
-    }
-
-    const handleRelease = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowLeft') {
-            moveLeft.value = false;
-        } else if (event.key === 'ArrowRight') {
-            moveRight.value = false;
-        } else if (event.key === 'ArrowDown') {
-            moveDown.value = false;
         }
     }
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keydown', handleKeyLeft);
     window.addEventListener('keydown', handleKeyRight);
-    window.addEventListener('keyup', handleRelease);
 
     onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keydown', handleKeyLeft);
     window.removeEventListener('keydown', handleKeyRight);
-    window.removeEventListener('keyup', handleRelease);
-})
+    left.value = 0;
+    right.value = 0;
+    down.value = 0;
+    })
 }
+
 
 const startGame = () => {
     clearInterval(interval.value!) 
@@ -116,7 +114,10 @@ const gamePaused = () => {
     :seconds="seconds" 
     :moveLeft="moveLeft"
     :moveRight="moveRight"
-    :moveDown="moveDown"/>
+    :moveDown="moveDown"
+    :left="left"
+    :right="right"
+    :down="down"/>
 </template>
 
 
