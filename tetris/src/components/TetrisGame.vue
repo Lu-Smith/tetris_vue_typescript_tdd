@@ -17,45 +17,47 @@ const left = ref(0)
 const right = ref(0)
 const down = ref(0)
 
-const gameBoardStarted = () => {
-    gameStarted.value = true;
-
-    const handleKeyLeft = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowLeft') {
+const handleKeyLeft = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft' && gameStarted.value === true) {
             moveLeft.value = true;
             left.value += 1
             event.preventDefault(); 
         }
     }
 
-    const handleKeyRight = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowRight') {
+
+const handleKeyRight = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowRight' && gameStarted.value === true) {
             moveRight.value = true;
             right.value += 1
             event.preventDefault(); 
         }
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowDown') {
-            moveDown.value = true;
-            down.value += 1
-            event.preventDefault(); 
-        }
+const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowDown' && gameStarted.value === true) {
+        moveDown.value = true;
+        down.value += 1
+        event.preventDefault(); 
     }
+}
 
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keydown', handleKeyLeft);
-    window.addEventListener('keydown', handleKeyRight);
-
-    onUnmounted(() => {
+onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keydown', handleKeyLeft);
     window.removeEventListener('keydown', handleKeyRight);
     left.value = 0;
     right.value = 0;
     down.value = 0;
-    })
+})
+
+const gameBoardStarted = () => {
+    gameStarted.value = true;
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyLeft);
+    window.addEventListener('keydown', handleKeyRight);
+
 }
 
 

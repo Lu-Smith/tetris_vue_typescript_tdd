@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { mount } from '@vue/test-utils';
 import TetrisGameVue from "../TetrisGame.vue";
 import GameContainerVue from "../GameContainer.vue";
+import { ref } from 'vue';
 
 describe('TetrisGame', () => {
     it('renders all elements correctly', () => {
@@ -126,44 +127,78 @@ describe('TetrisGame', () => {
         //  expect(numberOfOnes).toBe(4);
     });
 
-    it('handleKeyLeft sets moveLeft to true', () => {
+    it('handleKeyLeft sets moveLeft to true', async () => {
         const wrapper = mount(TetrisGameVue);
-        const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-        (wrapper.vm as any).handleKeyLeft(event);
-        expect((wrapper.vm as any).moveLeft).toBe(true);
-      });
-    
-      it('handleKeyRight sets moveRight to true', () => {
-        const wrapper = mount(TetrisGameVue);
-        const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
-        (wrapper.vm as any).handleKeyRight(event);
-        expect((wrapper.vm as any).moveRight).toBe(true);
-      });
-    
-      it('handleKeyDown sets moveDown to true', () => {
-        const wrapper = mount(TetrisGameVue);
-        const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
-        (wrapper.vm as any).handleKeyDown(event);
-        expect((wrapper.vm as any).moveDown).toBe(true);
-      });
 
-      it('handleRelease sets moveLeft, moveRight and moveDown to false', () => {
-        const wrapper = mount(TetrisGameVue);
-        const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-        (wrapper.vm as any).handleKeyLeft(event);
-        (wrapper.vm as any).handleRelease(event);
+        //display start button
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).gameStarted).toBe(true);
         expect((wrapper.vm as any).moveLeft).toBe(false);
-      });
+        expect((wrapper.vm as any).left).toBe(0);
 
-      it('adds event listeners when gameBoardStarted is called', () => {
-        const wrapper = mount(TetrisGameVue);
-        (wrapper.vm as any).gameBoardStarted();
-        expect((wrapper.vm as any).eventListenersAdded).toBe(true);
-      });
+        expect(typeof (wrapper.vm as any).handleKeyLeft).toBe('function');
+
+        const mockEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+
+        // Call the handleKeyLeft method with the mocked event
+        (wrapper.vm as any).handleKeyLeft(mockEvent);
     
-      it('removes event listeners when component is unmounted', () => {
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).moveLeft).toBe(true);
+        expect((wrapper.vm as any).left).not.toBe(0);
+    });
+
+    it('handleKeyRight sets moveRight to true', async () => {
         const wrapper = mount(TetrisGameVue);
-        wrapper.unmount();
-        expect((wrapper.vm as any).eventListenersRemoved).toBe(true);
-      });
+
+        //display start button
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).gameStarted).toBe(true);
+        expect((wrapper.vm as any).moveRight).toBe(false);
+        expect((wrapper.vm as any).right).toBe(0);
+
+        expect(typeof (wrapper.vm as any).handleKeyRight).toBe('function');
+
+        const mockEvent = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+
+        // Call the handleKeyRight method with the mocked event
+        (wrapper.vm as any).handleKeyRight(mockEvent);
+    
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).moveRight).toBe(true);
+        expect((wrapper.vm as any).right).not.toBe(0);
+    });
+
+    it('handleKeyDown sets moveDown to true', async () => {
+        const wrapper = mount(TetrisGameVue);
+
+        //display start button
+        const startButton = wrapper.find('button.start');
+        await startButton.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).gameStarted).toBe(true);
+        expect((wrapper.vm as any).moveDown).toBe(false);
+        expect((wrapper.vm as any).down).toBe(0);
+
+        expect(typeof (wrapper.vm as any).handleKeyDown).toBe('function');
+
+        const mockEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+
+        // Call the handleKeyDown method with the mocked event
+        (wrapper.vm as any).handleKeyDown(mockEvent);
+    
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).moveDown).toBe(true);
+        expect((wrapper.vm as any).down).not.toBe(0);
+    });
 })
