@@ -46,23 +46,34 @@ watch(
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           const blockValue = currentTetrisBlock.value[row][col];
           if (blockValue === 1) {
-            let newRow = row + 4 + right - left;
-            let newCol = col + seconds - 1 + down ;
+            let newRow = row + 4;
+            let newCol = col + seconds - 1;
 
-            if (newCol >= 0 ) {
+            if (newCol >= 0 && (newRow >= 0 || newRow <= boardRows.value.length - 1) ) {
               if (newCol < boardRows.value[0].length) {
-                if (newRow < 0 ) {
-                  newRow = 0 + currentTetrisBlock.value.length;
-                } else if (newRow > boardRows.value.length ) {
-                  newRow = boardRows.value.length - currentTetrisBlock.value.length;
-                } 
+                if (newRow === 0 || newRow === boardRows.value.length - 1) {
+                  if( newRow === 0) {
+                    right = 0
+                    console.log('right', right)
+                    console.log('newRow', newRow)
+                  } else {
+                    right = boardRows.value.length - 1
+                    console.log('right', right)
+                    console.log('newRow', newRow)
+                  }
+                  newCol = newCol + seconds - 1 + down;
+               
+                } else {
+                  newRow = row + 4 + right - left;
+                  newCol = col + seconds - 1 + down;
+                }
               } else {
-                newCol = boardRows.value[0].length - currentTetrisBlock.value[row].length;
+                return
               }
               boardRows.value[newRow][newCol] = blockValue;
-            } 
+            }
           }
-        }
+       }
       }
     }
   }
