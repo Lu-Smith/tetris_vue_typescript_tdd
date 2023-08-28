@@ -38,6 +38,14 @@ function getRandomTetrisShape() {
 const currentTetrisBlock = ref(getRandomTetrisShape());
 const currentTetrisPosition = ref({ row: 0, col: 0 });
 
+const moveTetrisLeft = () => {
+  console.log('move left');
+}
+
+const isMoveValid = () => {
+  console.log('move invalid')
+}
+
 
 </script>
 
