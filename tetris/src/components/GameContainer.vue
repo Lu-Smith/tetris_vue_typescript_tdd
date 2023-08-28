@@ -39,19 +39,19 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
 const currentTetrisPosition = ref({ row: 4, col: 0 });
 
 const moveTetrisLeft = () => {
-  currentTetrisPosition.value.row -=1
+  currentTetrisPosition.value.row -= 1
 }
 
 const moveTetrisRight = () => {
-  currentTetrisPosition.value.row +=1
+  currentTetrisPosition.value.row += 1
 }
 
 const moveTetrisDown = () => {
-  currentTetrisPosition.value.col +=1
+  currentTetrisPosition.value.col += 1
 }
 
 const moveTetrisDownWithTime = () => {
-  currentTetrisPosition.value.col +=1
+  currentTetrisPosition.value.col += 1
 }
 
 
@@ -59,7 +59,7 @@ const moveTetrisDownWithTime = () => {
 function moveTetrisBlock() {
   if (props.left) {
     moveTetrisLeft();
-  }
+  } 
   if (props.right) {
     moveTetrisRight();
   }
@@ -74,40 +74,33 @@ function moveTetrisBlock() {
 watch ( [() => props.seconds, () => props.left, () => props.right, () => props.down], () => {
   
   if(props.gameStarted) {
-            moveTetrisBlock()
-    for( let row = 0; row < currentTetrisBlock.value.length; row++) {
-      for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
-        if ( currentTetrisBlock.value[row][col] === 1) {
-          const isMoveValid = () => {
-            if(currentTetrisPosition.value.row >=0 
-            && currentTetrisPosition.value.col >=0 
-            && currentTetrisPosition.value.row < 10 
-            && currentTetrisPosition.value.col < boardRows.value[row].length - currentTetrisBlock.value[row].length + 2) {
-              return true;
-            } else {
-              return false;
-            }
-          }
-          if (isMoveValid()) {
-            console.log('move is valid')
-            const boardRow = currentTetrisPosition.value.row + row;
-            const boardCol = currentTetrisPosition.value.col + col -1;
-            console.log(boardRow)
-            console.log(boardCol)
-
-            // Set the corresponding cell in boardRows to 1
-            boardRows.value[boardRow][boardCol] = 1;
-          } else {
-            console.log('move is invalid')
-          }
+      moveTetrisBlock()
+      const isMoveValid = () => {
+        if(currentTetrisPosition.value.row >=0 
+        && currentTetrisPosition.value.col >=0 
+        && currentTetrisPosition.value.row < 10 
+        && currentTetrisPosition.value.col < 19) {
+          return true;
+        } else {
+          return false;
         }
       }
-    }
-  }
-
-
-})
-
+    
+      if (isMoveValid()) {
+        for( let row = 0; row < currentTetrisBlock.value.length; row++) {
+          for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
+            if ( currentTetrisBlock.value[row][col] === 1) {
+              console.log('move is valid')
+              const boardRow = currentTetrisPosition.value.row + row;
+              const boardCol = currentTetrisPosition.value.col + col - 1;
+              boardRows.value[boardRow][boardCol] = 1;
+              // currentTetrisPosition.value = { row: 4, col: 0 }
+            } 
+          }
+        }
+        return true;
+      }
+    }})
 </script>
 
 <template>
