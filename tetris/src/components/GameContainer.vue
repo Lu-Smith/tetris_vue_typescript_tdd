@@ -39,13 +39,53 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
 const currentTetrisPosition = ref({ row: 0, col: 0 });
 
 const moveTetrisLeft = () => {
-  console.log('move left');
+  currentTetrisPosition.value.row -=1
+}
+
+const moveTetrisRight = () => {
+  currentTetrisPosition.value.row +=1
+}
+
+const moveTetrisDown = () => {
+  currentTetrisPosition.value.col -=1
+}
+
+const moveTetrisDownWithTime = () => {
+  currentTetrisPosition.value.col -=1
 }
 
 const isMoveValid = () => {
-  console.log('move invalid')
+  if(currentTetrisPosition.value.row >= 0 
+  && currentTetrisPosition.value.col >=0 
+  && currentTetrisPosition.value.row < 10 
+  && currentTetrisPosition.value.col < 18 ) {
+    return true;
+  } else {
+    return false;
+  }
+  
 }
 
+watch ( [() => props.seconds, () => props.left, () => props.right, () => props.down], () => {
+  
+  if (isMoveValid()) {
+    if(props.left) {
+      moveTetrisLeft();
+    }
+    if(props.right) {
+      moveTetrisRight();
+    }
+    if(props.down) {
+      moveTetrisDown();
+    }
+    if(props.seconds) {
+      moveTetrisDownWithTime();
+    }
+  } else {
+    console.log('move is invalid')
+  }
+
+})
 
 </script>
 

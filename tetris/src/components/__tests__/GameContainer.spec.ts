@@ -40,6 +40,36 @@ describe('GameContainer', () => {
     });
 
     describe('Tetris Game Logic', () => {
+      it('should move Tetris block down with time', () => {
+        const wrapper = mount(GameContainerVue);
+        const moveTetrisLeft = (wrapper.vm as any).moveTetrisWithSeconds;
+        // Initialize a sample game board and Tetris block
+        const gameBoard = [
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+        ];
+    
+        const tetrisBlock = [
+          [1, 1],
+          [1, 1],
+        ];
+
+        const initialPosition = { row: 0, col: 2 };
+        // Call moveTetrisLeft()
+
+        const newPosition = { ...initialPosition };
+        newPosition.col -= 1;
+        
+        expect((wrapper.vm as any).isMoveValid(gameBoard, tetrisBlock, newPosition)).toBe(true);
+        moveTetrisLeft(initialPosition);
+
+        // Assert that the Tetris block has moved left as expected
+        expect(initialPosition).toEqual(newPosition);
+      });
+
       it('should move Tetris block left', () => {
         const wrapper = mount(GameContainerVue);
         const moveTetrisLeft = (wrapper.vm as any).moveTetrisLeft;
