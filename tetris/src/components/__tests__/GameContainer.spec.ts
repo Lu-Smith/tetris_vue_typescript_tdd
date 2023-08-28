@@ -61,7 +61,7 @@ describe('GameContainer', () => {
         // Call moveTetrisDownWithTime()
 
         const newPosition = { ...initialPosition };
-        newPosition.row -= 1;
+        newPosition.col += 1;
         
         expect((wrapper.vm as any).isMoveValid(gameBoard, tetrisBlock, newPosition)).toBe(true);
         moveTetrisDownWithTime(initialPosition);
@@ -87,11 +87,11 @@ describe('GameContainer', () => {
           [1, 1],
         ];
 
-        const initialPosition = { row: 0, col: 2 };
+        const initialPosition = { row: 3, col: 2 };
         // Call moveTetrisLeft()
 
         const newPosition = { ...initialPosition };
-        newPosition.col -= 1;
+        newPosition.row -= 1;
         
         expect((wrapper.vm as any).isMoveValid(gameBoard, tetrisBlock, newPosition)).toBe(true);
         moveTetrisLeft(initialPosition);
