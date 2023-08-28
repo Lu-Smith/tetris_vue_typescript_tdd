@@ -39,4 +39,30 @@ describe('GameContainer', () => {
           });
     });
 
+    describe('Tetris Game Logic', () => {
+      it('should move Tetris block left', () => {
+        // Initialize a sample game board and Tetris block
+        // Call moveTetrisLeft()
+        // Assert that the Tetris block has moved left as expected
+      });
+    
+      it('should move Tetris block right', () => {
+        // Initialize a sample game board and Tetris block
+        // Call moveTetrisRight()
+        // Assert that the Tetris block has moved right as expected
+      });
+    
+      it('should move Tetris block down', () => {
+        // Initialize a sample game board and Tetris block
+        // Call moveTetrisDown()
+        // Assert that the Tetris block has moved down as expected
+      });
+    
+      it('should check if a move is valid', () => {
+        // Initialize a sample game board and Tetris block
+        // Call isMoveValid() with different scenarios (valid and invalid moves)
+        // Assert that the function correctly identifies valid and invalid moves
+      });
+    });
+
 })
