@@ -50,9 +50,7 @@ watch(() => props.seconds, () => {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (newPosition.value.row >= 0 && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
-              console.log('row', newPosition.value.row)
-              console.log('col', newPosition.value.col)
+            if (newPosition.value.row >= 0 && newPosition.value.col < (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
               boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
             }
           }
