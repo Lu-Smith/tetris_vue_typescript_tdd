@@ -44,18 +44,22 @@ function moveTetrisDownWithTime() {
   newPosition.value.row = newPosition.value.row;
 }
 
-let timerId: number | null = null;
-
 watch(() => props.seconds, () => {
   if (props.gameStarted) {
+
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
+            if (newPosition.value.row >= 0 && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
+              console.log('row', newPosition.value.row)
+              console.log('col', newPosition.value.col)
+              boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
+            }
           }
         }
       }
 
+      
       // Move the block down
       moveTetrisDownWithTime();
 
@@ -63,10 +67,12 @@ watch(() => props.seconds, () => {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
+            if (newPosition.value.row >= 0 && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
             boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 1;
           }
         }
       }
+    }
   }
 });
 
