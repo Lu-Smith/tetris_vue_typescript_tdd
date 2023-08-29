@@ -36,71 +36,40 @@ function getRandomTetrisShape() {
 }
 
 const currentTetrisBlock = ref(getRandomTetrisShape());
-const currentTetrisPosition = ref({ row: 4, col: 0 });
+const newPosition = ref({row: 4, col: -1});
 
-const moveTetrisLeft = () => {
-  currentTetrisPosition.value.row -= 1
+
+function moveTetrisDownWithTime() {
+  newPosition.value.col += 1; // Move the block down
+  newPosition.value.row = newPosition.value.row;
 }
 
-const moveTetrisRight = () => {
-  currentTetrisPosition.value.row += 1
-}
+let timerId: number | null = null;
 
-const moveTetrisDown = () => {
-  currentTetrisPosition.value.col += 1
-}
-
-const moveTetrisDownWithTime = () => {
-  currentTetrisPosition.value.col += 1
-}
-
-
-
-function moveTetrisBlock() {
-  if (props.left) {
-    moveTetrisLeft();
-  } 
-  if (props.right) {
-    moveTetrisRight();
-  }
-  if (props.down) {
-    moveTetrisDown();
-  }
-  if (props.seconds) {
-    moveTetrisDownWithTime();
-  }
-}
-
-watch ( [() => props.seconds, () => props.left, () => props.right, () => props.down], () => {
-  
-  if(props.gameStarted) {
-      moveTetrisBlock()
-      const isMoveValid = () => {
-        if(currentTetrisPosition.value.row >=0 
-        && currentTetrisPosition.value.col >=0 
-        && currentTetrisPosition.value.row < 10 
-        && currentTetrisPosition.value.col < 19) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    
-      if (isMoveValid()) {
-        for( let row = 0; row < currentTetrisBlock.value.length; row++) {
-          for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
-            if ( currentTetrisBlock.value[row][col] === 1) {
-              console.log('move is valid')
-              const boardRow = currentTetrisPosition.value.row + row;
-              const boardCol = currentTetrisPosition.value.col + col - 1;
-              boardRows.value[boardRow][boardCol] = 1;
-              // currentTetrisPosition.value = { row: 4, col: 0 }
-            } 
+watch(() => props.seconds, () => {
+  if (props.gameStarted) {
+      for (let row = 0; row < currentTetrisBlock.value.length; row++) {
+        for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
+          if (currentTetrisBlock.value[row][col] === 1) {
+            boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
           }
         }
-        return true;
       }
-    }})
+
+      // Move the block down
+      moveTetrisDownWithTime();
+
+      // Update the new position of the block
+      for (let row = 0; row < currentTetrisBlock.value.length; row++) {
+        for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
+          if (currentTetrisBlock.value[row][col] === 1) {
+            boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 1;
+          }
+        }
+      }
+  }
+});
+
 </script>
 
 <template>
