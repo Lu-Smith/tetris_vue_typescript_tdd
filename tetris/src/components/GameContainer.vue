@@ -37,8 +37,6 @@ function getRandomTetrisShape() {
 
 const currentTetrisBlock = ref(getRandomTetrisShape());
 const newPosition = ref({row: 4, col: -1});
-const moveLeft = ref(false);
-
 
 function moveTetrisDownWithTime() {
   newPosition.value.col += 1; // Move the block down
@@ -47,7 +45,9 @@ function moveTetrisDownWithTime() {
 
 function moveTetrisLeft() {
   newPosition.value.col = newPosition.value.col; 
-  newPosition.value.row -= 1; // Move the block left
+  if(props.left! <= newPosition.value.row ) {
+    newPosition.value.row -= props.left!; // Move the block left
+  }
 }
 
 watch([() => props.seconds, () => props.left], () => {
@@ -63,11 +63,12 @@ watch([() => props.seconds, () => props.left], () => {
         }
       }
 
-      
       // Move the block down
       moveTetrisDownWithTime();
+        // Move the left
       if (props.left) {
         moveTetrisLeft();
+        console.log(props.left)
       }
 
       // Update the new position of the block
