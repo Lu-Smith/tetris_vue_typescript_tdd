@@ -82,10 +82,10 @@ describe('GameContainer', () => {
         expect((wrapper.vm as any).newPosition.row).toBe(4);
 
        
-        // await (wrapper.vm as any).moveTetrisLeft();
-        // await wrapper.vm.$nextTick();
+        await (wrapper.vm as any).moveTetrisLeft();
+        await wrapper.vm.$nextTick();
 
-        // expect((wrapper.vm as any).newPosition.row).toBe(3);
+        expect((wrapper.vm as any).newPosition.row).toBe(3);
 
         // await (wrapper.vm as any).moveTetrisLeft();
         // await wrapper.vm.$nextTick();
