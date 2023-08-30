@@ -50,6 +50,13 @@ function moveTetrisLeft() {
   }
 }
 
+function moveTetrisRight() {
+  newPosition.value.col = newPosition.value.col; 
+  if(props.right! <= newPosition.value.row ) {
+    newPosition.value.row += props.right!; // Move the block right
+  }
+}
+
 watch([() => props.seconds, () => props.left], () => {
   if (props.gameStarted) {
 
