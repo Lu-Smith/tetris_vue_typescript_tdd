@@ -67,46 +67,36 @@ describe('GameContainer', () => {
         });
   
 
-      it('should move Tetris block left', () => {
-        // const wrapper = mount(GameContainerVue);
-        // const moveTetrisLeft = (wrapper.vm as any).moveTetrisLeft;
-        // // Initialize a sample game board and Tetris block
-        // const gameBoard = [
-        //   [0, 0, 0, 0, 0],
-        //   [0, 0, 0, 0, 0],
-        //   [0, 0, 0, 0, 0],
-        //   [0, 0, 0, 0, 0],
-        //   [0, 0, 0, 0, 0],
-        // ];
-    
-        // const tetrisBlock = [
-        //   [1, 1],
-        //   [1, 1],
-        // ];
+      it('should move Tetris block left', async () => {
+        const wrapper = mount(GameContainerVue, {
+          props: {
+            gameStarted: true,
+            seconds: 2,
+            newPosition: {row: 4, col: -1}, 
+          },
+        });
 
-        // const initialPosition = { row: 3, col: 2 };
-        // // Call moveTetrisLeft()
+        expect(wrapper.vm.gameStarted).toBe(true);
+        expect(wrapper.vm.seconds).toBe(2);
+        expect((wrapper.vm as any).newPosition.col).toBe(-1);
+        expect((wrapper.vm as any).newPosition.row).toBe(4);
 
-        // const newPosition = { ...initialPosition };
-        // newPosition.row -= 1;
-        
-        // expect((wrapper.vm as any).isMoveValid(gameBoard, tetrisBlock, newPosition)).toBe(true);
-        // moveTetrisLeft(initialPosition);
+       
+        // await (wrapper.vm as any).moveTetrisLeft();
+        // await wrapper.vm.$nextTick();
 
-        // // Assert that the Tetris block has moved left as expected
-        // expect(initialPosition).toEqual(newPosition);
+        // expect((wrapper.vm as any).newPosition.row).toBe(3);
+
+        // await (wrapper.vm as any).moveTetrisLeft();
+        // await wrapper.vm.$nextTick();
+
+        // expect((wrapper.vm as any).newPosition.row).toBe(2);
       });
     
       it('should move Tetris block right', () => {
         // Initialize a sample game board and Tetris block
         // Call moveTetrisRight()
         // Assert that the Tetris block has moved right as expected
-      });
-    
-      it('should move Tetris block down', () => {
-        // Initialize a sample game board and Tetris block
-        // Call moveTetrisDown()
-        // Assert that the Tetris block has moved down as expected
       });
     
       it('should check if a move is valid', () => {
