@@ -10,16 +10,12 @@ const interval = ref<null | number>(null)
 const level = ref(1)
 const startButton = ref('Start')
 const gameStarted = ref(false)
-const moveLeft = ref(false)
-const moveRight = ref(false)
-const moveDown = ref(false)
 const left = ref(0)
 const right = ref(0)
 const down = ref(0)
 
 const handleKeyLeft = (event: KeyboardEvent) => {
         if (event.key === 'ArrowLeft' && gameStarted.value === true) {
-            moveLeft.value = true;
             left.value += 1
             event.preventDefault(); 
         }
@@ -28,7 +24,6 @@ const handleKeyLeft = (event: KeyboardEvent) => {
 
 const handleKeyRight = (event: KeyboardEvent) => {
         if (event.key === 'ArrowRight' && gameStarted.value === true) {
-            moveRight.value = true;
             right.value += 1
             event.preventDefault(); 
         }
@@ -36,7 +31,6 @@ const handleKeyRight = (event: KeyboardEvent) => {
 
 const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'ArrowDown' && gameStarted.value === true) {
-        moveDown.value = true;
         down.value += 1
         event.preventDefault(); 
     }
@@ -114,9 +108,6 @@ const gamePaused = () => {
     <GameContainer 
     :gameStarted="gameStarted" 
     :seconds="seconds" 
-    :moveLeft="moveLeft"
-    :moveRight="moveRight"
-    :moveDown="moveDown"
     :left="left"
     :right="right"
     :down="down"/>

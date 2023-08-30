@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { mount } from '@vue/test-utils';
 import TetrisGameVue from "../TetrisGame.vue";
 import GameContainerVue from "../GameContainer.vue";
-import { ref } from 'vue';
 
 describe('TetrisGame', () => {
     it('renders all elements correctly', () => {
@@ -136,7 +135,6 @@ describe('TetrisGame', () => {
         await wrapper.vm.$nextTick();
 
         expect((wrapper.vm as any).gameStarted).toBe(true);
-        expect((wrapper.vm as any).moveLeft).toBe(false);
         expect((wrapper.vm as any).left).toBe(0);
 
         expect(typeof (wrapper.vm as any).handleKeyLeft).toBe('function');
@@ -148,7 +146,6 @@ describe('TetrisGame', () => {
     
         await wrapper.vm.$nextTick();
 
-        expect((wrapper.vm as any).moveLeft).toBe(true);
         expect((wrapper.vm as any).left).not.toBe(0);
     });
 
@@ -161,7 +158,6 @@ describe('TetrisGame', () => {
         await wrapper.vm.$nextTick();
 
         expect((wrapper.vm as any).gameStarted).toBe(true);
-        expect((wrapper.vm as any).moveRight).toBe(false);
         expect((wrapper.vm as any).right).toBe(0);
 
         expect(typeof (wrapper.vm as any).handleKeyRight).toBe('function');
@@ -173,7 +169,6 @@ describe('TetrisGame', () => {
     
         await wrapper.vm.$nextTick();
 
-        expect((wrapper.vm as any).moveRight).toBe(true);
         expect((wrapper.vm as any).right).not.toBe(0);
     });
 
@@ -186,7 +181,6 @@ describe('TetrisGame', () => {
         await wrapper.vm.$nextTick();
 
         expect((wrapper.vm as any).gameStarted).toBe(true);
-        expect((wrapper.vm as any).moveDown).toBe(false);
         expect((wrapper.vm as any).down).toBe(0);
 
         expect(typeof (wrapper.vm as any).handleKeyDown).toBe('function');
@@ -198,7 +192,6 @@ describe('TetrisGame', () => {
     
         await wrapper.vm.$nextTick();
 
-        expect((wrapper.vm as any).moveDown).toBe(true);
         expect((wrapper.vm as any).down).not.toBe(0);
     });
 
