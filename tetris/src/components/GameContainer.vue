@@ -44,6 +44,11 @@ function moveTetrisDownWithTime() {
   newPosition.value.row = newPosition.value.row;
 }
 
+function moveTetrisLeft() {
+  newPosition.value.col = newPosition.value.col; 
+  newPosition.value.row -= 1; // Move the block left
+}
+
 watch(() => props.seconds, () => {
   if (props.gameStarted) {
 
