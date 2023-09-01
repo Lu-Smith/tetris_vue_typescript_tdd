@@ -57,7 +57,7 @@ function moveTetrisRight() {
   }
 }
 
-watch([() => props.seconds, () => props.left], () => {
+watch([() => props.seconds, () => props.left, () => props.right], () => {
   if (props.gameStarted) {
 
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
@@ -75,12 +75,12 @@ watch([() => props.seconds, () => props.left], () => {
         // Move the left
       if (props.left) {
         moveTetrisLeft();
-        console.log(props.left)
+        console.log('left', props.left)
       }
 
       if (props.right) {
         moveTetrisRight();
-        console.log(props.right)
+        console.log('right', props.right)
       }
 
       // Update the new position of the block
