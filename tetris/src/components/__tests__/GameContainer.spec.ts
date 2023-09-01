@@ -125,14 +125,17 @@ describe('GameContainer', () => {
         const wrapper = mount(GameContainerVue, {
           props: {
             gameStarted: true,
-            seconds: 0,
+            seconds: 2,
             newPosition: {row: 4, col: -1},
             down: 1, 
           },
         });
 
+        await wrapper.vm.$nextTick();
+
         expect(wrapper.vm.gameStarted).toBe(true);
-        expect(wrapper.vm.seconds).toBe(0);
+        expect(wrapper.vm.seconds).toBe(2);
+
         expect((wrapper.vm as any).newPosition.col).toBe(-1);
         expect((wrapper.vm as any).newPosition.row).toBe(4);
 

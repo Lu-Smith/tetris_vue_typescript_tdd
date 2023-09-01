@@ -63,12 +63,15 @@ function moveTetrisRight() {
     
     } 
   }
- 
+}
+
+function moveTetrisDown() {
+  newPosition.value.col += 1; // Move the block down
+  newPosition.value.row = newPosition.value.row;
 }
 
 watch([() => props.seconds, () => props.left, () => props.right], () => {
   if (props.gameStarted) {
-
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
