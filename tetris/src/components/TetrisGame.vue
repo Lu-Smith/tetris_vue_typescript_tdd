@@ -42,15 +42,6 @@ const handleKeyDown = (event: KeyboardEvent) => {
     }
 }
 
-onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeyDown);
-    window.removeEventListener('keydown', handleKeyLeft);
-    window.removeEventListener('keydown', handleKeyRight);
-    left.value = 0;
-    right.value = 0;
-    down.value = 0;
-})
-
 const gameBoardStarted = () => {
     gameStarted.value = true;
 
