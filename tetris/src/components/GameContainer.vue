@@ -55,13 +55,16 @@ function moveTetrisLeft() {
 
 function moveTetrisRight() {
   newPosition.value.col = newPosition.value.col; 
-  if(newPosition.value.row < boardRows.value.length) {
-    if (newPosition.value.row + props.right! >= boardRows.value.length) {
-      newPosition.value.row = boardRows.value.length - 1; // Don't move the block right
+  if(newPosition.value.row < (boardRows.value.length - currentTetrisBlock.value.length)) {
+    if (newPosition.value.row + props.right! >= (boardRows.value.length - currentTetrisBlock.value.length)) {
+      newPosition.value.row = boardRows.value.length - currentTetrisBlock.value.length; // Don't move the block right
+      console.log(newPosition.value.row);
     } else { 
       newPosition.value.row += props.right!; // Move the block right
+    
     } 
   }
+ 
 }
 
 watch([() => props.seconds, () => props.left, () => props.right], () => {
@@ -70,7 +73,9 @@ watch([() => props.seconds, () => props.left, () => props.right], () => {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (newPosition.value.row >= 0 && newPosition.value.row < boardRows.value.length && newPosition.value.col < (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
+            if (newPosition.value.row >= 0 
+            && newPosition.value.row < (boardRows.value.length)
+            && newPosition.value.col < (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
               boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
             }
           }
@@ -92,14 +97,14 @@ watch([() => props.seconds, () => props.left, () => props.right], () => {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (newPosition.value.row >= 0 && newPosition.value.row < boardRows.value.length && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
+            if (newPosition.value.row >= 0 
+            && newPosition.value.row < (boardRows.value.length)
+            && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
             boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 1;
           }
         }
       }
     }
-    console.log('ROW', newPosition.value.row)
-    console.log('board', boardRows.value.length)
   }
 });
 </script>
