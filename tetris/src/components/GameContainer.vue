@@ -52,8 +52,10 @@ function moveTetrisLeft() {
 
 function moveTetrisRight() {
   newPosition.value.col = newPosition.value.col; 
-  if(newPosition.value.row <= boardRows.value.length) {
+  if(newPosition.value.row < boardRows.value.length) {
     newPosition.value.row += props.right!; // Move the block right
+    console.log('ROW', newPosition.value.row)
+    console.log('board', boardRows.value.length)
   }
 }
 
@@ -76,11 +78,13 @@ watch([() => props.seconds, () => props.left, () => props.right], () => {
       if (props.left) {
         moveTetrisLeft();
         console.log('left', props.left)
+        console.log('right', props.right)
       }
 
       if (props.right) {
         moveTetrisRight();
         console.log('right', props.right)
+        console.log('left', props.left)
       }
 
       // Update the new position of the block
