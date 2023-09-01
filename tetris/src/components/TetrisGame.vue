@@ -16,8 +16,9 @@ const down = ref(0)
 
 const handleKeyLeft = (event: KeyboardEvent) => {
         if (event.key === 'ArrowLeft' && gameStarted.value === true) {
-            left.value += 1
-            right.value = 0
+            left.value += 1;
+            right.value = 0;
+            down.value = 0;
             event.preventDefault(); 
         }
     }
@@ -25,15 +26,18 @@ const handleKeyLeft = (event: KeyboardEvent) => {
 
 const handleKeyRight = (event: KeyboardEvent) => {
         if (event.key === 'ArrowRight' && gameStarted.value === true) {
-            right.value += 1
-            left.value = 0
+            right.value += 1;
+            left.value = 0;
+            down.value = 0;
             event.preventDefault(); 
         }
     }
 
 const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'ArrowDown' && gameStarted.value === true) {
-        down.value += 1
+        down.value += 1;
+        right.value = 0;
+        left.value = 0;
         event.preventDefault(); 
     }
 }
