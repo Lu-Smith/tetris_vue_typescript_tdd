@@ -148,7 +148,7 @@ describe('GameContainer', () => {
         await (wrapper.vm as any).moveTetrisDown();
         await wrapper.vm.$nextTick();
 
-        expect((wrapper.vm as any).newPosition.row).toBe(1);
+        expect((wrapper.vm as any).newPosition.col).toBe(1);
       });
     
       it('should check if a move is valid', () => {
