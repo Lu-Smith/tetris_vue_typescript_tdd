@@ -58,7 +58,6 @@ function moveTetrisRight() {
   if(newPosition.value.row < (boardRows.value.length - currentTetrisBlock.value.length)) {
     if (newPosition.value.row + props.right! >= (boardRows.value.length - currentTetrisBlock.value.length)) {
       newPosition.value.row = boardRows.value.length - currentTetrisBlock.value.length; // Don't move the block right
-      console.log(newPosition.value.row);
     } else { 
       newPosition.value.row += props.right!; // Move the block right
     

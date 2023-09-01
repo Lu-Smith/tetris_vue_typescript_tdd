@@ -120,6 +120,33 @@ describe('GameContainer', () => {
 
         expect((wrapper.vm as any).newPosition.row).toBe(6);
       });
+
+      it('should move Tetris block down', async () => {
+        const wrapper = mount(GameContainerVue, {
+          props: {
+            gameStarted: true,
+            seconds: 0,
+            newPosition: {row: 4, col: -1},
+            down: 1, 
+          },
+        });
+
+        expect(wrapper.vm.gameStarted).toBe(true);
+        expect(wrapper.vm.seconds).toBe(0);
+        expect((wrapper.vm as any).newPosition.col).toBe(-1);
+        expect((wrapper.vm as any).newPosition.row).toBe(4);
+
+       
+        await (wrapper.vm as any).moveTetrisDown();
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).newPosition.col).toBe(0);
+
+        await (wrapper.vm as any).moveTetrisDown();
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).newPosition.row).toBe(1);
+      });
     
       it('should check if a move is valid', () => {
         // Initialize a sample game board and Tetris block
