@@ -70,7 +70,7 @@ function moveTetrisDown() {
   newPosition.value.row = newPosition.value.row;
 }
 
-watch([() => props.seconds, () => props.left, () => props.right], () => {
+watch([() => props.seconds, () => props.left, () => props.right, () => props.down], () => {
   if (props.gameStarted) {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
@@ -89,10 +89,16 @@ watch([() => props.seconds, () => props.left, () => props.right], () => {
         moveTetrisLeft();
         }
 
+         // Move the block right
         if (props.right) {
           moveTetrisRight();
         }
         // Move the block down
+        if (props.down) {
+          moveTetrisDown();
+        }
+
+        // Move the block down with time
         moveTetrisDownWithTime();
 
       // Update the new position of the block
