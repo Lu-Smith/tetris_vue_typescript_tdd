@@ -39,20 +39,21 @@ const currentTetrisBlock = ref(getRandomTetrisShape());
 const newPosition = ref({row: 4, col: -1});
 
 function moveTetrisDownWithTime() {
-  newPosition.value.col += 1; // Move the block down
-  newPosition.value.row = newPosition.value.row;
+  if (newPosition.value.col + 1 <= 17 ) {
+    newPosition.value.col += 1; // Move the block down
+  } else {
+    newPosition.value.col = 17; // Don't move the block down
+    console.log('down', props.down);
+    console.log('col', newPosition.value.col);
+  }
 }
 
 function moveTetrisLeft() {
   newPosition.value.col = newPosition.value.col; 
-
     if (newPosition.value.row - props.left! < 0 ) {
       newPosition.value.row = 0; // Don't move the block left
     } else { 
       newPosition.value.row -= props.left! }; // Move the block left
-
-  console.log('left', props.left);
-  console.log('row', newPosition.value.row);
 }
 
 function moveTetrisRight() {
@@ -68,7 +69,13 @@ function moveTetrisRight() {
 }
 
 function moveTetrisDown() {
-  newPosition.value.col += 1; // Move the block down
+  if (newPosition.value.col + 1 <= 17 ) {
+    newPosition.value.col += 1; // Move the block down
+  } else {
+    newPosition.value.col = 17; // Don't move the block down
+    console.log('down', props.down);
+    console.log('col', newPosition.value.col);
+  }
   newPosition.value.row = newPosition.value.row;
 }
 
