@@ -45,12 +45,14 @@ function moveTetrisDownWithTime() {
 
 function moveTetrisLeft() {
   newPosition.value.col = newPosition.value.col; 
-  if(props.left! <= newPosition.value.row ) {
+
     if (newPosition.value.row - props.left! < 0 ) {
       newPosition.value.row = 0; // Don't move the block left
     } else { 
       newPosition.value.row -= props.left! }; // Move the block left
-    } 
+
+  console.log('left', props.left);
+  console.log('row', newPosition.value.row);
 }
 
 function moveTetrisRight() {
