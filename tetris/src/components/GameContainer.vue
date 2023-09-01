@@ -46,16 +46,21 @@ function moveTetrisDownWithTime() {
 function moveTetrisLeft() {
   newPosition.value.col = newPosition.value.col; 
   if(props.left! <= newPosition.value.row ) {
-    newPosition.value.row -= props.left!; // Move the block left
-  }
+    if (newPosition.value.row - props.left! < 0 ) {
+      newPosition.value.row = 0; // Don't move the block left
+    } else { 
+      newPosition.value.row -= props.left! }; // Move the block left
+    } 
 }
 
 function moveTetrisRight() {
   newPosition.value.col = newPosition.value.col; 
   if(newPosition.value.row < boardRows.value.length) {
-    newPosition.value.row += props.right!; // Move the block right
-    console.log('ROW', newPosition.value.row)
-    console.log('board', boardRows.value.length)
+    if (newPosition.value.row + props.right! >= boardRows.value.length) {
+      newPosition.value.row = boardRows.value.length - 1; // Don't move the block right
+    } else { 
+      newPosition.value.row += props.right!; // Move the block right
+    } 
   }
 }
 
@@ -65,41 +70,38 @@ watch([() => props.seconds, () => props.left, () => props.right], () => {
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (newPosition.value.row >= 0 && newPosition.value.col < (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
+            if (newPosition.value.row >= 0 && newPosition.value.row < boardRows.value.length && newPosition.value.col < (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
               boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 0;
             }
           }
         }
       }
 
-      // Move the block down
-      moveTetrisDownWithTime();
         // Move the left
-      if (props.left) {
+        if (props.left) {
         moveTetrisLeft();
-        console.log('left', props.left)
-        console.log('right', props.right)
-      }
+        }
 
-      if (props.right) {
-        moveTetrisRight();
-        console.log('right', props.right)
-        console.log('left', props.left)
-      }
+        if (props.right) {
+          moveTetrisRight();
+        }
+        // Move the block down
+        moveTetrisDownWithTime();
 
       // Update the new position of the block
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
-            if (newPosition.value.row >= 0 && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
+            if (newPosition.value.row >= 0 && newPosition.value.row < boardRows.value.length && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
             boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 1;
           }
         }
       }
     }
+    console.log('ROW', newPosition.value.row)
+    console.log('board', boardRows.value.length)
   }
 });
-
 </script>
 
 <template>
