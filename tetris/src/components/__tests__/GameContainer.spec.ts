@@ -151,11 +151,18 @@ describe('GameContainer', () => {
         expect((wrapper.vm as any).newPosition.col).toBe(1);
       });
     
-      it('should check if a move is valid', () => {
-        // Initialize a sample game board and Tetris block
-        // Call isMoveValid() with different scenarios (valid and invalid moves)
-        // Assert that the function correctly identifies valid and invalid moves
-      });
-});
+      it('genrate new block', async () => {
+        const wrapper = mount(GameContainerVue, {
+          props: {
+            gameStarted: true,
+            seconds: 5,
+          },
+        });
+        expect(wrapper.vm.gameStarted).toBe(true);
+        expect(wrapper.vm.seconds).toBe(5);
+
+
+    });
+  });
 
 });
