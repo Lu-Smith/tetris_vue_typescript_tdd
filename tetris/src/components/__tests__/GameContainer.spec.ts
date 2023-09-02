@@ -24,7 +24,6 @@ describe('GameContainer', () => {
     it('displays the current Tetris block correctly', async () => {
         const wrapper = mount(GameContainerVue);
     
-
         (wrapper.vm as any).tetrisBlock = [[[1, 1], [1, 1]]];
     
         await wrapper.vm.$nextTick();
@@ -38,14 +37,14 @@ describe('GameContainer', () => {
             }
           });
     });
+});
 
-    describe('Tetris Game Logic', () => {
-      it('should move Tetris block down with time',  async () => {
+describe('Tetris Game Logic', () => {
+    it ('should move Tetris block down with time',  async () => {
         const wrapper = mount(GameContainerVue, {
             props: {
               gameStarted: true,
               seconds: 0,
-              newPosition: {row: 4, col: -1}, 
             },
           });
 
@@ -64,7 +63,7 @@ describe('GameContainer', () => {
 
           expect((wrapper.vm as any).newPosition.col).toBe(1);
 
-        });
+      });
   
 
       it('should move Tetris block left', async () => {
@@ -72,7 +71,6 @@ describe('GameContainer', () => {
           props: {
             gameStarted: true,
             seconds: 0,
-            newPosition: {row: 4, col: -1},
             left: 1, 
           },
         });
@@ -99,7 +97,6 @@ describe('GameContainer', () => {
           props: {
             gameStarted: true,
             seconds: 0,
-            newPosition: {row: 4, col: -1},
             right: 1, 
           },
         });
@@ -126,7 +123,6 @@ describe('GameContainer', () => {
           props: {
             gameStarted: true,
             seconds: 2,
-            newPosition: {row: 4, col: -1},
             down: 1, 
           },
         });
@@ -160,10 +156,14 @@ describe('GameContainer', () => {
         expect(wrapper.vm.gameStarted).toBe(true);
         expect((wrapper.vm as any).newPosition.col).toBe(-1);
         expect((wrapper.vm as any).newPosition.row).toBe(4);
+        expect((wrapper.vm as any).tetrisBlock).toStrictEqual((wrapper.vm as any).currentTetrisBlock);
 
         //when newPosition.col is equal 1 generate the new Tetris block
 
         await (wrapper.vm as any).moveTetrisDown();
+        await wrapper.vm.$nextTick();
+
+        (wrapper.vm as any).generateNewTetrisBlock();
         await wrapper.vm.$nextTick();
 
         await (wrapper.vm as any).moveTetrisDown();
@@ -171,13 +171,9 @@ describe('GameContainer', () => {
 
         expect((wrapper.vm as any).newPosition.col).toBe(1);
 
-        await (wrapper.vm as any).genrateNewTetrisBlock();
-        await wrapper.vm.$nextTick();
-
-        expect((wrapper.vm as any).newTetrisBlock).toBe(true);
-
-
-    });
-  });
-
+        expect((wrapper.vm as any).tetrisBlock).toStrictEqual((wrapper.vm as any).newTetrisBlock);
+      });
 });
+
+
+

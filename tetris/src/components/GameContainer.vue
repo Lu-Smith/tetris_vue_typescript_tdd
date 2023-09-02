@@ -40,6 +40,12 @@ const newTetrisBlock = ref(getRandomTetrisShape());
 const newPosition = ref({row: 4, col: -1});
 const tetrisBlock = ref([...currentTetrisBlock.value]);
 
+function generateNewTetrisBlock() {
+  if (newPosition.value.col === 0) {
+      tetrisBlock.value = [...newTetrisBlock.value];
+  }
+}
+
 function moveTetrisDownWithTime() {
   if (newPosition.value.col + 1 <= 17 ) {
     newPosition.value.col += 1; // Move the block down
@@ -77,10 +83,12 @@ function moveTetrisDown() {
     newPosition.value.col = 17; // Don't move the block down
   }
   newPosition.value.row = newPosition.value.row;
-}
+} 
 
 watch([() => props.seconds, () => props.left, () => props.right, () => props.down], () => {
   if (props.gameStarted) {
+    generateNewTetrisBlock();
+
       for (let row = 0; row < currentTetrisBlock.value.length; row++) {
         for (let col = 0; col < currentTetrisBlock.value[row].length; col++) {
           if (currentTetrisBlock.value[row][col] === 1) {
@@ -122,10 +130,6 @@ watch([() => props.seconds, () => props.left, () => props.right, () => props.dow
         }
       }
     }
-
-    if (newPosition.value.col === 1) {
-      tetrisBlock.value = [...newTetrisBlock.value];
-    } 
   }
 });
 </script>
