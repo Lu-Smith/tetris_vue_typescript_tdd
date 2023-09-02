@@ -155,11 +155,23 @@ describe('GameContainer', () => {
         const wrapper = mount(GameContainerVue, {
           props: {
             gameStarted: true,
-            seconds: 5,
           },
         });
         expect(wrapper.vm.gameStarted).toBe(true);
-        expect(wrapper.vm.seconds).toBe(5);
+        expect((wrapper.vm as any).newPosition.col).toBe(-1);
+        expect((wrapper.vm as any).newPosition.row).toBe(4);
+
+        //when newPosition.col is equal 1 generate the new Tetris block
+
+        await (wrapper.vm as any).moveTetrisDown();
+        await wrapper.vm.$nextTick();
+
+        await (wrapper.vm as any).moveTetrisDown();
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).newPosition.col).toBe(1);
+
+        await (wrapper.vm as any).genrateNewTetrisBlock();
 
 
     });
