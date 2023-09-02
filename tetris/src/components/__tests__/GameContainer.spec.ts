@@ -172,6 +172,9 @@ describe('GameContainer', () => {
         expect((wrapper.vm as any).newPosition.col).toBe(1);
 
         await (wrapper.vm as any).genrateNewTetrisBlock();
+        await wrapper.vm.$nextTick();
+
+        expect((wrapper.vm as any).newTetrisBlock).toBe(true);
 
 
     });
