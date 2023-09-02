@@ -25,7 +25,7 @@ describe('GameContainer', () => {
         const wrapper = mount(GameContainerVue);
     
 
-        (wrapper.vm as any).currentTetrisBlock = [[[1, 1], [1, 1]]];
+        (wrapper.vm as any).tetrisBlock = [[[1, 1], [1, 1]]];
     
         await wrapper.vm.$nextTick();
    

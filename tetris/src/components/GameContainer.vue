@@ -36,7 +36,9 @@ function getRandomTetrisShape() {
 }
 
 const currentTetrisBlock = ref(getRandomTetrisShape());
+const newTetrisBlock = ref(getRandomTetrisShape());
 const newPosition = ref({row: 4, col: -1});
+const tetrisBlock = ref([...currentTetrisBlock.value]);
 
 function moveTetrisDownWithTime() {
   if (newPosition.value.col + 1 <= 17 ) {
@@ -73,8 +75,6 @@ function moveTetrisDown() {
     newPosition.value.col += 1; // Move the block down
   } else {
     newPosition.value.col = 17; // Don't move the block down
-    console.log('down', props.down);
-    console.log('col', newPosition.value.col);
   }
   newPosition.value.row = newPosition.value.row;
 }
@@ -122,13 +122,17 @@ watch([() => props.seconds, () => props.left, () => props.right, () => props.dow
         }
       }
     }
+
+    if (newPosition.value.col === 1) {
+      tetrisBlock.value = [...newTetrisBlock.value];
+    } 
   }
 });
 </script>
 
 <template>
-        <div class="block-container">
-            <div class="block-rows" v-for="(blockRow, rowIndex) in currentTetrisBlock " :key="rowIndex">
+    <div class="block-container">
+          <div class="block-rows" v-for="(blockRow, rowIndex) in tetrisBlock " :key="rowIndex">
                 <div 
                 class="block-cells" 
                 v-for="(blockCell, cellIndex) in blockRow" 
