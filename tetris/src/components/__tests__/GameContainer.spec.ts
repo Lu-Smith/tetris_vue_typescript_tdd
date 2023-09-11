@@ -173,6 +173,26 @@ describe('Tetris Game Logic', () => {
 
         expect((wrapper.vm as any).tetrisBlock).toStrictEqual((wrapper.vm as any).newTetrisBlock);
       });
+
+      it('moves the new tetris block when the current block touches the bottom of the board', async () => {
+        const wrapper = mount(GameContainerVue, {
+          props: {
+            gameStarted: true,
+          },
+        });
+        expect(wrapper.vm.gameStarted).toBe(true);
+        expect((wrapper.vm as any).newPosition.col).toBe(-1);
+        expect((wrapper.vm as any).newPosition.row).toBe(4);
+        expect((wrapper.vm as any).tetrisBlock).toStrictEqual((wrapper.vm as any).currentTetrisBlock);
+
+        //when newPosition.value.col = (boardRows.value[0].length - currentTetrisBlock.value[row].length) the new tetris block moves
+
+        await (wrapper.vm as any).newPosition.value.col.toBe((wrapper.vm as any).boardRows.value[0].length - (wrapper.vm as any).currentTetrisBlock.value.row.length);
+      
+
+        expect((wrapper.vm as any).newPosition.col).toBe(14);
+
+      });
 });
 
 

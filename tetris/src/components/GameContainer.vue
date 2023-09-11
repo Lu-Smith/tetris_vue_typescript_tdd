@@ -126,7 +126,8 @@ watch([() => props.seconds, () => props.left, () => props.right, () => props.dow
             && newPosition.value.row < (boardRows.value.length)
             && newPosition.value.col <= (boardRows.value[0].length - currentTetrisBlock.value[row].length)) {
             boardRows.value[newPosition.value.row + row][newPosition.value.col + col] = 1;
-          }
+          } 
+
         }
       }
     }
